@@ -3,7 +3,7 @@
 Sirven para **comprobar la app con sus propias manos** antes de presentarla y, si el jurado pregunta
 «¿cómo verificaron que funciona?», para mostrar qué se probó y qué resultado se esperaba.
 
-> Complementan las 190 pruebas automáticas (`python -m unittest discover -s tests`).
+> Complementan las pruebas automáticas (193 de Python con `python -m unittest discover -s tests`, y 45 + 17 de la versión web en `web/tests/`).
 > Los resultados esperados de los grupos **A–E, G1–G4, H, I1–I5, J y K** se obtuvieron ejecutando cada caso contra
 > la aplicación real, con la fecha de «hoy» fijada en el 11/11/2026 (los de A–I, con la versión original y con la de
 > apariencia renovada: las salidas fueron idénticas). Los grupos **F, G5, G6, I6 e I7** dependen de tu computador
@@ -339,6 +339,36 @@ nombre `Pan casero`; ingredientes `Harina` `500` g y `Agua` `300` ml; en *Prepar
 | K7.1 | Crea una receta, cierra la app con la **X** y ábrela otra vez | La receta sigue en **Mis recetas** y vuelve a aparecer (con ★) si tienes ingredientes | |
 | K7.2 | **Archivo dañado.** Cierra la app, abre `%APPDATA%\FoodSaver\recetas_propias.json` con el Bloc de notas, escribe `esto no es json` y guarda; abre la app | La app **abre igual**, con tus ingredientes, y avisa: *El archivo de tus recetas estaba dañado y se empezó con la lista vacía.* + la ruta de la copia `recetas_propias.corrupto` | |
 | K7.3 | Las 17 recetas de siempre | Siguen funcionando igual (las de la demo del grupo D no cambian) | |
+
+---
+
+## L. Versión Android (APK) y web
+
+Estos casos se hacen **en el celular**. Los mensajes y resultados son los mismos de los grupos A–K (la pantalla
+cambia, las reglas no): puedes repetir cualquier caso de esos grupos en la app de Android y debe dar lo mismo.
+Lo que sigue son los casos propios del celular. **No pude probarlos en un celular real**; lo que sí se probó fue la
+misma pantalla en un Chrome emulando un Pixel 7 (`web/tests/e2e/movil.e2e.cjs`) y que el APK compila y está firmado.
+
+| ID | Qué hacer | Resultado esperado | Resultado |
+|---|---|---|---|
+| L1 | Descarga `FoodSaver.apk` (ver README, sección 2b) y ábrelo desde el administrador de archivos | Android pide permiso para instalar desde esa fuente. Puede salir un aviso de **Play Protect**: *Instalar de todos modos*. Termina con «Aplicación instalada» | |
+| L2 | Abre la app | Icono de una **hoja blanca sobre fondo verde**, nombre *Food Saver*. Se ve el encabezado verde con los tres contadores y las pestañas **Despensa / Recetas** | |
+| L3 | Toca el campo **Vence** | Aparece el **teclado numérico**. Escribe `02112026`: queda `02/11/2026` sin que tengas que poner barras | |
+| L4 | Toca **Cantidad** | Aparece el teclado con punto decimal. `1,5` y `1.5` se aceptan | |
+| L5 | Con el campo de nombre, pulsa **Siguiente** del teclado | Pasa a Cantidad, y de ahí a Vence (no envía el formulario a medias) | |
+| L6 | Pulsa **Cargar ejemplo** y ve a **Recetas** | Contadores `10 vigentes · 4 por vencer · 2 vencidos`. La primera receta es *Tostadas francesas* y viene **abierta**, con su detalle y pasos | |
+| L7 | Toca el título de una receta | Se abre y se cierra su detalle (una a la vez no es obligatorio) | |
+| L8 | **+ Crear mi receta** | Se abre a **pantalla completa**. Con el teclado abierto puedes llegar a *Agregar ingrediente* y a *Guardar receta* (la pantalla se desplaza) | |
+| L9 | Escribe un nombre de receta y toca el botón **«atrás»** de Android (o el gesto) | Pregunta *Tienes cambios sin guardar en esta receta…*. Con **atrás** otra vez (o *No*) sigues en la receta **sin perder lo escrito**. Con *Sí* se cierra | |
+| L10 | Con **Mis recetas** abierto, botón **atrás** | Se cierra «Mis recetas» (no sale de la app) | |
+| L11 | Estando en la pestaña **Recetas**, botón **atrás** | Vuelve a **Despensa**. Un **atrás** más, sin nada abierto, **sale** de la app | |
+| L12 | Agrega un ingrediente, cierra la app del todo (sácala de las recientes) y ábrela | El ingrediente **sigue ahí** | |
+| L13 | Activa el **modo avión** y usa la app (agrega, edita, crea una receta) | Todo funciona igual; no necesita internet | |
+| L14 | Gira el celular (horizontal) | Nada se corta ni se sale de la pantalla; no hay desplazamiento lateral | |
+| L15 | Cambia el celular a **modo oscuro** | La app se ve oscura, con texto legible (contraste suficiente) | |
+| L16 | En Ajustes del celular, pon el **tamaño de letra** al máximo | El texto crece y los botones siguen visibles y tocables; nada queda tapado | |
+| L17 | Usa un nombre con tilde o eñe (`Piña`, `Limón`) y una receta que pida `limon` | Se reconoce igual que en el escritorio (tildes y plurales ignorados) | |
+| L18 | Mira la información de la app en Ajustes | Paquete `com.foodsaver.app`, nombre *Food Saver*. Ocupa unos 4 MB | |
 
 ---
 

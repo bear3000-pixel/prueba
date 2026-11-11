@@ -49,13 +49,14 @@ async function caso(nombre, funcion) {
   const { s, url } = await servidor();
   const navegador = await chromium.launch();
 
-  async function nuevaPagina(opciones = {}) {
+  async function nuevaPagina(opciones = {}, scriptInicial = null) {
     const contexto = await navegador.newContext({ ...devices["Pixel 7"], locale: "es-CO", timezoneId: "America/Bogota", ...opciones });
     const pagina = await contexto.newPage();
     pagina.errores = [];
     pagina.on("console", (m) => { if (["error", "warning"].includes(m.type())) pagina.errores.push(m.text()); });
     pagina.on("pageerror", (e) => pagina.errores.push("pageerror: " + e.message));
     await pagina.clock.install({ time: HOY });
+    if (scriptInicial) await pagina.addInitScript(scriptInicial);
     await pagina.goto(url);
     return pagina;
   }
@@ -396,6 +397,43 @@ async function caso(nombre, funcion) {
     assert.deepEqual(chicos, [], "objetivos táctiles menores de 40 px");
     const desborda = await p.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     assert.equal(desborda, false, "no debe haber desplazamiento horizontal en el celular");
+  });
+
+  await caso("botón «atrás» de Android: cierra cuadros, vuelve a Despensa y solo al final sale", async () => {
+    // Se simula el plugin App de Capacitor (en el APK real lo provee @capacitor/app)
+    const p = await nuevaPagina({}, () => {
+      window.Capacitor = { Plugins: { App: {
+        addListener: (nombre, funcion) => { window.__atras = funcion; return Promise.resolve({ remove() {} }); },
+        exitApp: () => { window.__salio = true; },
+      } } };
+    });
+    // (no se espera el resultado: el plugin real tampoco lo hace, y la confirmación se queda esperando al usuario)
+    const atras = () => p.evaluate(() => { window.__atras(); });
+    const abierto = (id) => p.evaluate((i) => document.getElementById(i).open, id);
+    assert.equal(await p.evaluate(() => typeof window.__atras), "function", "la app escucha el botón atrás");
+
+    await p.click("#pestana-recetas"); await p.click("#boton-crear-receta");
+    await p.fill("#receta-nombre", "A medias");
+    await atras(); // con cambios sin guardar: pregunta antes de cerrar
+    assert.equal(await abierto("dialogo-confirmar"), true);
+    assert.match(await p.locator("#confirmar-texto").innerText(), /cambios sin guardar/);
+    await atras(); // «atrás» sobre la confirmación = «No»
+    assert.equal(await abierto("dialogo-confirmar"), false);
+    assert.equal(await abierto("dialogo-receta"), true, "la receta a medias NO se pierde");
+    await atras(); await p.click("#confirmar-si"); // ahora sí la descarta
+    assert.equal(await abierto("dialogo-receta"), false);
+
+    await p.click("#boton-mis-recetas");
+    assert.equal(await abierto("dialogo-mis-recetas"), true);
+    await atras();
+    assert.equal(await abierto("dialogo-mis-recetas"), false);
+
+    assert.equal(await p.locator("#vista-recetas").isVisible(), true);
+    await atras(); // en Recetas: vuelve a Despensa
+    assert.equal(await p.locator("#vista-despensa").isVisible(), true);
+    assert.equal(await p.evaluate(() => window.__salio === true), false, "todavía no sale");
+    await atras(); // en Despensa y sin nada abierto: sale de la app
+    assert.equal(await p.evaluate(() => window.__salio === true), true);
   });
 
   await caso("modo oscuro", async () => {

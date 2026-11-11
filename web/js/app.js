@@ -613,6 +613,28 @@ function conectarEventos() {
   document.addEventListener("visibilitychange", () => { if (!document.hidden) siCambioElDia(); });
 }
 
+/**
+ * Botón «atrás» de Android. Dentro de la app (Capacitor) ese botón cierra la aplicación entera, así que se
+ * escucha aquí para que primero cierre lo que esté abierto: una confirmación (equivale a «No»), el cuadro de
+ * la receta (preguntando antes de perder cambios), «Mis recetas»; luego vuelve de «Recetas» a «Despensa»; y solo
+ * al final sale de la app. En el navegador normal no hay Capacitor y el navegador ya cierra los cuadros solo (Esc).
+ */
+async function manejarAtras() {
+  if ($("dialogo-confirmar").open) { $("confirmar-no").click(); return; }
+  if ($("dialogo-receta").open) { await cerrarEditorReceta(); return; }
+  if ($("dialogo-mis-recetas").open) { $("dialogo-mis-recetas").close(); return; }
+  const pestanas = $("pestana-recetas").parentElement;
+  const enRecetas = $("pestana-recetas").getAttribute("aria-selected") === "true" && getComputedStyle(pestanas).display !== "none";
+  if (enRecetas) { mostrarPestana("despensa"); return; }
+  globalThis.Capacitor?.Plugins?.App?.exitApp?.() ?? globalThis.Capacitor?.registerPlugin?.("App")?.exitApp?.();
+}
+
+function conectarBotonAtras() {
+  const capacitor = globalThis.Capacitor;
+  const plugin = capacitor?.Plugins?.App ?? capacitor?.registerPlugin?.("App");
+  if (plugin?.addListener) plugin.addListener("backButton", manejarAtras);
+}
+
 function llenarUnidades() {
   const opciones = UNIDADES.map((u) => `<option value="${u}">${u}</option>`).join("");
   $("unidad").innerHTML = opciones;
@@ -641,6 +663,7 @@ function iniciar() {
   }
   avisoGeneral(avisos.filter(Boolean).join("\n"));
   conectarEventos();
+  conectarBotonAtras();
   mostrarPestana("despensa");
   renderTodo();
   registrarServiceWorker();

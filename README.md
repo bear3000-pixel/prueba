@@ -16,8 +16,11 @@ Solución al reto **Food Saver** del evento *Prompt & Solve*: una aplicación de
 - **Rechaza datos inválidos** (cantidad 0, negativa, nula, con letras…, fechas que no existen) con un mensaje claro,
   tanto al agregar ingredientes como al crear recetas.
 - **Guarda los datos** (ingredientes y recetas propias) y siguen ahí al cerrar y volver a abrir el programa.
+- **También para Android:** la misma app como **APK** instalable en el celular (y como página web que funciona
+  sin internet). Ver la sección 2b.
 
-Está hecha solo con la biblioteca estándar de Python (tkinter): no hay dependencias que instalar para usarla.
+La versión de escritorio está hecha solo con la biblioteca estándar de Python (tkinter): no hay dependencias que
+instalar para usarla. La de Android/web está hecha con HTML, CSS y JavaScript puros, sin librerías.
 
 ---
 
@@ -50,6 +53,47 @@ Los datos se guardan en `%APPDATA%\FoodSaver\ingredientes.json` (si algo falla, 
 
 ---
 
+## 2b. Versión para Android (celular)
+
+Es la **misma aplicación** (mismas reglas, mismos mensajes, mismas 17 recetas y recetas propias), escrita en
+JavaScript en la carpeta `web/`. Tkinter no existe en Android, así que no se puede «convertir» el programa de
+escritorio: se reescribió, y se comprueba que las dos versiones den **los mismos resultados** (ver más abajo).
+
+### Instalar el APK
+1. En GitHub: pestaña **Actions** → **Compilar app Android (APK)** → la última ejecución → sección **Artifacts** →
+   descarga **FoodSaver-apk** (un `.zip`) y extráelo: dentro está `FoodSaver.apk`.
+2. Pásalo al celular (cable USB, Drive, WhatsApp, correo…) y ábrelo desde el administrador de archivos.
+3. Android pedirá permiso para **instalar apps de esta fuente** (la del navegador o del administrador de archivos):
+   actívalo solo para esa app.
+4. Si aparece un aviso de **Google Play Protect** («app no verificada»), elige **Instalar de todos modos**.
+   Es normal: el APK está firmado con la clave de depuración, no con una de la tienda de Google Play.
+
+### Usarla como página web (sin instalar nada)
+```bash
+cd web
+python -m http.server 8000          # y abre http://localhost:8000 en el navegador
+```
+Funciona en cualquier navegador moderno. Con un servidor `https` (por ejemplo GitHub Pages) el navegador del celular
+ofrece **«Añadir a la pantalla de inicio»** y la app queda instalada, también sin internet.
+
+### Detalles a conocer
+- **Los datos se guardan en el propio celular** (en el almacenamiento de la app) y no se sincronizan con la versión
+  de escritorio. El formato es el mismo JSON, por lo que se podrían copiar de una a otra.
+- **Botón «atrás» de Android:** primero cierra lo que esté abierto (preguntando si hay una receta sin guardar), luego
+  vuelve de «Recetas» a «Despensa» y solo entonces sale de la app.
+- En pantallas anchas (tableta o computador) se ven las dos columnas a la vez; en el celular, dos pestañas.
+- Tema claro y oscuro automáticos, según la configuración del celular.
+
+### Cómo se mantienen iguales las dos versiones
+`web/tests/generar_referencia.py` ejecuta el **Python** y guarda cientos de casos con su resultado esperado
+(`web/tests/referencia.json`) y las 17 recetas (`web/js/recetas.js`, así no se transcriben a mano).
+`web/tests/paridad.test.js` ejecuta el **JavaScript** con esos mismos casos y exige resultados idénticos: valores,
+mensajes de error, orden de las recetas, puntajes. Si cambias una regla en Python,
+`tests/test_web_referencia.py` falla hasta que ejecutes `python web/tests/generar_referencia.py`, y entonces las
+pruebas de JavaScript te dicen qué falta copiar.
+
+---
+
 ## 3. Mapa del código
 
 ```
@@ -67,10 +111,16 @@ food_saver/
   tema.py                  Colores, tipografía y estilos de la apariencia renovada
   icono.py                 Icono de la ventana (generado por assets/generar_icono.py)
 assets/icono.ico           Icono del .exe
-tests/                     190 pruebas automáticas (python -m unittest discover -s tests)
+assets/generar_icono.py    Genera todos los iconos (.exe, ventana, web y Android) desde una sola hoja
+web/                       VERSIÓN ANDROID / WEB (JavaScript): index.html, css/, js/, manifest, service worker
+  js/modelo.js ...         Las mismas reglas que food_saver/*.py (modelo, logica, recetasUsuario, almacenamiento)
+  js/app.js                La pantalla (pestañas, formularios, cuadros de recetas, botón «atrás»)
+  tests/                   45 pruebas Node (comparan con Python) + 17 casos de extremo a extremo (Playwright)
+android-app/               Envoltorio Capacitor que convierte web/ en un APK
+tests/                     193 pruebas automáticas de Python (python -m unittest discover -s tests)
 CASOS_DE_PRUEBA.md         Casos de prueba MANUALES con datos exactos y resultado esperado
 build_exe.bat              Crea el .exe en Windows
-.github/workflows/         Crea el .exe en GitHub Actions
+.github/workflows/         Crea el .exe (Windows) y el APK (Android) en GitHub Actions
 ```
 
 Idea de diseño: **las reglas no dependen de la pantalla**. `modelo.py` y `logica.py` no importan tkinter y
@@ -163,6 +213,12 @@ Estas son decisiones que tomó el código y que conviene que el equipo entienda 
 - **Varias compras del mismo producto** con distinta fecha son filas separadas, y la receta usa la que vence antes.
 - **La fecha de «hoy» es la del reloj del computador.** Si cambia la fecha del sistema, cambian los estados.
 - Sal, agua, aceite y especias básicas se asumen disponibles y no aparecen en las recetas.
+- **Las reglas existen dos veces** (Python y JavaScript). Para que no se separen, las pruebas de paridad comparan
+  ambas con los mismos casos; aun así, un cambio de reglas hay que hacerlo en los dos lados.
+- **El APK no se probó en un celular real**: sí se probó la misma pantalla en un Chrome que emula un Pixel 7 y se
+  comprobó que el APK compila, tiene el paquete correcto y está firmado. El botón «atrás» y la instalación en un
+  celular concreto son lo primero que conviene mirar (grupo L de `CASOS_DE_PRUEBA.md`).
+- El APK está firmado con la clave de **depuración**: sirve para instalarlo y mostrarlo, no para publicarlo en Google Play.
 
 ## 6. Cómo se verificó
 
@@ -175,6 +231,10 @@ Estas son decisiones que tomó el código y que conviene que el equipo entienda 
   pantalla vacía y en modo edición. Contraste de colores texto/fondo ≥ 4,5:1 (nivel AA).
 - Ejecución del programa empaquetado con PyInstaller para confirmar que abre.
 - El workflow de GitHub repite pruebas y empaquetado en Windows y comprueba que el `.exe` abre.
+- **Versión Android/web:** 45 pruebas de Node que comparan el JavaScript con el Python (se comprobó que detectan
+  errores introducidos a propósito), 17 casos de extremo a extremo en Chrome emulando un Pixel 7 (escribir en los
+  campos, tocar botones, recargar, cortar el internet, modo oscuro, botón «atrás») y la compilación del APK en
+  GitHub con comprobación de su paquete y su firma.
 
 ## 7. Criterios de evaluación del reto y dónde se ve cada uno
 
@@ -185,7 +245,7 @@ Estas son decisiones que tomó el código y que conviene que el equipo entienda 
 | **Experiencia de usuario y acabado** (15 %) | Interfaz renovada: encabezado con resumen, estados con **texto y color** (no solo color), mensajes de error/éxito en una caja visible, botones con jerarquía, buen contraste, zoom alto y ventana adaptada a la pantalla. Los errores comunes de entrada (cantidad inválida, fecha inexistente, campos vacíos, archivo dañado) se explican sin romper la app. |
 | **Descomposición de tareas** (15 %) | El código se divide por responsabilidad (modelo, lógica, recetas, almacenamiento, pantalla, apariencia) y la mejora visual se hizo como una capa aparte, sin tocar lo que ya funcionaba. |
 | **Gestión del contexto** (15 %) | El documento del reto se tradujo a requisitos concretos (sección 3), límites conocidos (sección 5) y reglas explícitas. |
-| **Verificación y depuración** (20 %) | 190 pruebas automáticas, `CASOS_DE_PRUEBA.md`, comparación entre la versión original y la renovada, y compilación + prueba automática en Windows. |
+| **Verificación y depuración** (20 %) | 193 pruebas de Python, 45 de la versión web comparadas con el Python, 17 de extremo a extremo, `CASOS_DE_PRUEBA.md`, comparación entre la versión original y la renovada, y compilación + prueba automática del `.exe` en Windows y del APK en Android. |
 
 > Los tres últimos criterios también evalúan **cómo trabajó el equipo con el agente de IA** (qué pidió, qué revisó,
 > qué corrigió). Esta tabla muestra la evidencia que deja el repositorio; la explicación del proceso la tiene que
