@@ -20,6 +20,11 @@ class Receta:
     nombre: str
     ingredientes: tuple[str, ...]
     instrucciones: tuple[str, ...]  # pasos breves, en orden
+    # Los campos de abajo son opcionales: las recetas predefinidas no los usan.
+    # Las recetas que crea el usuario (recetas_usuario.py) sí:
+    cantidades: tuple[tuple[float, str], ...] = ()  # (cantidad, unidad) de cada ingrediente, en el mismo orden
+    propia: bool = False                            # True = la creó el usuario
+    id: str = ""                                    # identificador (solo las propias)
 
 
 RECETAS: tuple[Receta, ...] = (

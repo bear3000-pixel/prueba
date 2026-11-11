@@ -9,7 +9,8 @@ Pantalla:
   └────────────────────────────────┴────────────────────────────────┘
 
 Este archivo SOLO arma la pantalla y conecta botones; las reglas están en modelo.py
-y logica.py, y el guardado en almacenamiento.py.
+y logica.py, y el guardado en almacenamiento.py. Las recetas propias del usuario se
+validan en recetas_usuario.py y sus ventanas están en dialogos.py.
 """
 from __future__ import annotations
 
@@ -22,7 +23,8 @@ from pathlib import Path
 from tkinter import messagebox, ttk
 from typing import Callable
 
-from . import almacenamiento
+from . import almacenamiento, recetas_usuario
+from .dialogos import AdministradorRecetas, DialogoReceta
 from .ejemplos import ingredientes_de_ejemplo
 from .logica import Sugerencia, clasificar, sugerir_recetas
 from .modelo import (
@@ -30,15 +32,17 @@ from .modelo import (
     UNIDADES,
     ErrorValidacion,
     Ingrediente,
+    autoformatear_fecha,
     crear_ingrediente,
     describir_vencimiento,
     dias_para_vencer,
     esta_por_vencer,
     formatear_cantidad,
     formatear_fecha,
+    parsear_fecha,
     texto_cantidad,
 )
-from .recetas import RECETAS
+from .recetas import RECETAS, Receta
 
 COLOR_ERROR = "#b00020"
 COLOR_OK = "#1b6e2e"
@@ -61,6 +65,11 @@ class AplicacionFoodSaver:
         self.ruta = Path(ruta_datos) if ruta_datos else almacenamiento.ruta_por_defecto()
 
         self.ingredientes, aviso_carga = almacenamiento.cargar(self.ruta)
+        # Las recetas que crea el usuario van en su propio archivo, junto al de ingredientes.
+        self.ruta_recetas = self.ruta.with_name("recetas_propias.json")
+        self.recetas_propias, aviso_recetas = recetas_usuario.cargar(self.ruta_recetas)
+        self.dialogos_modales = True  # las pruebas lo ponen en False para no bloquear
+        self.administrador: AdministradorRecetas | None = None
         self.id_en_edicion: str | None = None      # id del ingrediente que se está editando
         self._sugerencias: dict[str, Sugerencia] = {}  # iid de la tabla de recetas -> sugerencia
         self._dia_mostrado = hoy_fn()
@@ -71,9 +80,11 @@ class AplicacionFoodSaver:
         self._construir_columna_recetas()
         self.refrescar()
 
-        if aviso_carga:
+        avisos = [a for a in (aviso_carga, aviso_recetas) if a]
+        if avisos:
             # Después de dibujar la ventana, para que el aviso aparezca encima de ella.
-            self.raiz.after(100, lambda: messagebox.showwarning("Datos guardados", aviso_carga))
+            texto_avisos = "\n\n".join(avisos)
+            self.raiz.after(100, lambda: messagebox.showwarning("Datos guardados", texto_avisos))
         # Si la app queda abierta pasada la medianoche, los "días restantes" cambian.
         self.raiz.after(60_000, self._vigilar_cambio_de_dia)
 
@@ -165,7 +176,38 @@ class AplicacionFoodSaver:
             "unidad": self.combo_unidad,
             "vencimiento": self.entrada_vence,
         }
+        # La fecha se formatea sola mientras se escribe (02112026 -> 02/11/2026).
+        self._fecha_anterior = ""            # lo último que había en el campo (para saber si se escribe o se borra)
+        self._mensaje_fecha: str | None = None  # el aviso de fecha inválida que mostramos en vivo
+        self.var_vence.trace_add("write", self._al_escribir_fecha)
         self.entrada_nombre.focus_set()
+
+    def _al_escribir_fecha(self, *_argumentos) -> None:
+        """Se ejecuta cada vez que cambia el texto de «Vence»: pone las barras y avisa si la fecha
+        completa no existe. No decide nada por su cuenta: la validación real sigue siendo
+        `parsear_fecha` al pulsar Agregar."""
+        actual = self.var_vence.get()
+        escribiendo = len(actual) > len(self._fecha_anterior)  # False = el usuario está borrando
+        formateada = autoformatear_fecha(actual, agregar_barra=escribiendo)
+        if formateada != actual:
+            self._fecha_anterior = formateada
+            self.var_vence.set(formateada)  # vuelve a entrar aquí, ya con el texto corregido
+            return
+        self._fecha_anterior = actual
+        self._validar_fecha_en_vivo(actual)
+
+    def _validar_fecha_en_vivo(self, texto: str) -> None:
+        if len(texto) == 10:  # DD/MM/AAAA completo
+            try:
+                parsear_fecha(texto)
+            except ErrorValidacion as error:
+                self._mensaje_fecha = str(error)
+                self._mostrar_mensaje(self._mensaje_fecha, error=True)
+                return
+        # Fecha incompleta o correcta: si el aviso en pantalla era el de la fecha, se quita.
+        if self._mensaje_fecha is not None and self.etiqueta_mensaje.cget("text") == self._mensaje_fecha:
+            self._mostrar_mensaje("")
+        self._mensaje_fecha = None
 
     def _construir_columna_ingredientes(self) -> None:
         izquierda = ttk.Frame(self.raiz)
@@ -230,13 +272,25 @@ class AplicacionFoodSaver:
         derecha.rowconfigure(1, weight=2)
         derecha.rowconfigure(2, weight=3)
 
+        # Fila superior: el filtro a la izquierda y, a la derecha, los botones de recetas propias.
+        cabecera = ttk.Frame(derecha)
+        cabecera.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 6))
         self.var_solo_completas = tk.BooleanVar(value=False)
         ttk.Checkbutton(
-            derecha,
-            text="Mostrar solo recetas que puedo cocinar ya (sin ingredientes faltantes)",
+            cabecera,
+            text="Solo recetas que puedo cocinar ya",
             variable=self.var_solo_completas,
             command=self._refrescar_recetas,
-        ).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 6))
+        ).pack(side="left")
+        # Recetas propias: crear una nueva o administrar (editar / eliminar) las que ya hay.
+        self.boton_mis_recetas = ttk.Button(
+            cabecera, text="Mis recetas", command=self.abrir_administrador_de_recetas
+        )
+        self.boton_crear_receta = ttk.Button(
+            cabecera, text="+ Crear mi receta", command=self.abrir_creador_de_recetas
+        )
+        self.boton_mis_recetas.pack(side="right")
+        self.boton_crear_receta.pack(side="right", padx=(0, 6))
 
         self.tabla_recetas = ttk.Treeview(
             derecha, columns=("receta", "tienes", "urgente"), show="headings",
@@ -485,7 +539,7 @@ class AplicacionFoodSaver:
     def _refrescar_recetas(self) -> None:
         hoy = self.hoy_fn()
         sugerencias = sugerir_recetas(
-            self.ingredientes, RECETAS, hoy, solo_completas=self.var_solo_completas.get()
+            self.ingredientes, self._todas_las_recetas(), hoy, solo_completas=self.var_solo_completas.get()
         )
         recordada = self._nombre_receta_seleccionada()
 
@@ -501,8 +555,8 @@ class AplicacionFoodSaver:
             self.tabla_recetas.insert(
                 "", "end", iid=iid, tags=("urgente",) if urgente else (),
                 values=(
-                    sug.receta.nombre,
-                    f"{len(sug.usados)} de {len(sug.usados) + len(sug.faltantes)}",
+                    ("★ " if sug.receta.propia else "") + sug.receta.nombre,  # ★ = receta creada por el usuario
+                    f"{len(sug.usados)} de {sug.total_ingredientes}",
                     urgente,
                 ),
             )
@@ -543,31 +597,125 @@ class AplicacionFoodSaver:
             self._escribir_detalle([(mensaje, "suave")])
             return
 
-        partes: list[tuple[str, str]] = [(sug.receta.nombre + "\n", "titulo")]
+        receta = sug.receta
+        partes: list[tuple[str, str]] = [(("★ " if receta.propia else "") + receta.nombre + "\n", "titulo")]
+        if receta.propia:
+            partes.append(("Receta creada por ti\n", "suave"))
         if sug.completa:
             partes.append(("✔ Tienes todos los ingredientes: puedes cocinarla ya.\n", "bueno"))
         else:
-            partes.append((f"Te faltan {len(sug.faltantes)} ingrediente(s).\n", "alerta"))
+            faltan = len(sug.faltantes) + len(sug.insuficientes)
+            partes.append((f"Te faltan {faltan} ingrediente(s).\n", "alerta"))
 
         partes.append(("\nLo que usarías de tu despensa\n", "negrita"))
         for uso in sorted(sug.usados, key=lambda u: u.dias):
             lote = uso.lote
+            # En las recetas propias se indica también cuánto pide la receta.
+            pide = f" — la receta pide {texto_cantidad(*uso.necesita)}" if uso.necesita else ""
             partes.append((
                 f"  • {lote.nombre} ({texto_cantidad(lote.cantidad, lote.unidad)}) "
-                f"— {describir_vencimiento(uso.dias)}\n",
+                f"— {describir_vencimiento(uso.dias)}{pide}\n",
                 "alerta" if uso.dias <= DIAS_POR_VENCER else "",
             ))
 
+        if sug.insuficientes:
+            partes.append(("\nLo tienes, pero en poca cantidad\n", "negrita"))
+            for poco in sug.insuficientes:
+                falta = poco.necesita[0] - poco.tienes[0]
+                partes.append((
+                    f"  • {poco.lote.nombre}: pide {texto_cantidad(*poco.necesita)}, tienes "
+                    f"{texto_cantidad(*poco.tienes)} (te faltan {texto_cantidad(round(falta, 3), poco.necesita[1])})\n",
+                    "falta",
+                ))
+
         if sug.faltantes:
             partes.append(("\nTe faltan\n", "negrita"))
+            cantidades = dict(zip(receta.ingredientes, receta.cantidades))  # vacío en las predefinidas
             for nombre in sug.faltantes:
                 nota = " (lo tienes, pero está vencido)" if nombre in sug.descartados_por_vencidos else ""
-                partes.append((f"  • {nombre.capitalize()}{nota}\n", "falta"))
+                pide = f" — pide {texto_cantidad(*cantidades[nombre])}" if nombre in cantidades else ""
+                partes.append((f"  • {nombre.capitalize()}{pide}{nota}\n", "falta"))
 
         partes.append(("\nPreparación\n", "negrita"))
         for numero, paso in enumerate(sug.receta.instrucciones, start=1):
             partes.append((f"  {numero}. {paso}\n", ""))
         self._escribir_detalle(partes)
+
+    # ------------------------------------------------------------------ #
+    # Recetas propias del usuario
+    # ------------------------------------------------------------------ #
+    def _todas_las_recetas(self) -> tuple[Receta, ...]:
+        """Las predefinidas más las que creó el usuario."""
+        return tuple(RECETAS) + tuple(self.recetas_propias)
+
+    def nombres_de_recetas(self, excluir_id: str | None = None) -> list[str]:
+        """Nombres de todas las recetas (para no repetir), sin contar la que se está editando."""
+        return [r.nombre for r in self._todas_las_recetas() if not (excluir_id and r.id == excluir_id)]
+
+    def abrir_creador_de_recetas(self, receta: Receta | None = None) -> DialogoReceta:
+        """Abre el formulario para crear una receta (o editar `receta`)."""
+        return DialogoReceta(self, receta, modal=self.dialogos_modales)
+
+    def abrir_administrador_de_recetas(self) -> AdministradorRecetas:
+        """Abre la lista «Mis recetas» (si ya está abierta, la trae al frente)."""
+        if self.administrador is not None and self.administrador.winfo_exists():
+            self.administrador.lift()
+            return self.administrador
+        self.administrador = AdministradorRecetas(self, modal=False)
+        return self.administrador
+
+    def guardar_receta_propia(self, receta: Receta) -> bool:
+        """Agrega la receta, o reemplaza la que tenga su mismo id. Devuelve False si no se pudo
+        guardar en disco (la receta queda en pantalla de todos modos y se puede reintentar)."""
+        es_nueva = all(r.id != receta.id for r in self.recetas_propias)
+        if es_nueva:
+            self.recetas_propias = self.recetas_propias + [receta]
+        else:
+            self.recetas_propias = [receta if r.id == receta.id else r for r in self.recetas_propias]
+        guardada = self._guardar_recetas()
+        self._refrescar_recetas()
+        self._avisar_cambio_de_recetas()
+
+        verbo = "guardada" if es_nueva else "actualizada"
+        iid = next((i for i, s in self._sugerencias.items() if s.receta.id == receta.id), None)
+        if iid:  # ya aparece en las sugerencias: se selecciona para que se vea
+            self.tabla_recetas.selection_set(iid)
+            self.tabla_recetas.see(iid)
+            self._mostrar_detalle()
+            self._mostrar_mensaje(f"Receta «{receta.nombre}» {verbo}. Ya aparece en las recetas sugeridas.")
+        else:
+            self._mostrar_mensaje(
+                f"Receta «{receta.nombre}» {verbo}. Aparecerá en las sugerencias cuando tengas "
+                "alguno de sus ingredientes (vigente) en la despensa."
+            )
+        return guardada
+
+    def eliminar_receta_propia(self, id_receta: str) -> None:
+        receta = next((r for r in self.recetas_propias if r.id == id_receta), None)
+        if receta is None:
+            return
+        self.recetas_propias = [r for r in self.recetas_propias if r.id != id_receta]
+        self._guardar_recetas()
+        self._refrescar_recetas()
+        self._avisar_cambio_de_recetas()
+        self._mostrar_mensaje(f"Receta «{receta.nombre}» eliminada.")
+
+    def _guardar_recetas(self) -> bool:
+        try:
+            recetas_usuario.guardar(self.ruta_recetas, self.recetas_propias)
+            return True
+        except OSError as error:
+            messagebox.showerror(
+                "No se pudo guardar",
+                f"No se pudieron guardar tus recetas en:\n{self.ruta_recetas}\n\n{error}\n\n"
+                "Siguen en pantalla mientras no cierres la aplicación.",
+            )
+            return False
+
+    def _avisar_cambio_de_recetas(self) -> None:
+        """Si la lista «Mis recetas» está abierta, la actualiza."""
+        if self.administrador is not None and self.administrador.winfo_exists():
+            self.administrador.refrescar()
 
     # ------------------------------------------------------------------ #
     # Cambio de día con la app abierta

@@ -31,12 +31,17 @@ def ruta_por_defecto() -> Path:
 
 def guardar(ruta: Path, ingredientes: list[Ingrediente]) -> None:
     """Escribe todos los ingredientes. Lanza OSError si no se puede escribir."""
+    escribir_json_atomico(
+        ruta,
+        {"version": VERSION_ARCHIVO, "ingredientes": [i.a_dict() for i in ingredientes]},
+    )
+
+
+def escribir_json_atomico(ruta: Path, contenido: dict) -> None:
+    """Guarda `contenido` como JSON de forma atómica (archivo temporal + reemplazo).
+    También la usan las recetas propias. Lanza OSError si no se puede escribir."""
     ruta = Path(ruta)
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    contenido = {
-        "version": VERSION_ARCHIVO,
-        "ingredientes": [i.a_dict() for i in ingredientes],
-    }
     descriptor, ruta_temporal = tempfile.mkstemp(dir=ruta.parent, prefix=".tmp-", suffix=".json")
     try:
         with os.fdopen(descriptor, "w", encoding="utf-8") as archivo:

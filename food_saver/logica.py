@@ -12,6 +12,7 @@ from typing import Iterable, NamedTuple
 from .modelo import (
     DIAS_POR_VENCER,
     Ingrediente,
+    convertir_cantidad,
     dias_para_vencer,
     esta_vencido,
     normalizar,
@@ -81,24 +82,53 @@ class Uso(NamedTuple):
     requerido: str      # como lo pide la receta, p. ej. "tomate"
     lote: Ingrediente   # el lote que se usaría (el que vence primero)
     dias: int           # días que le quedan a ese lote
+    necesita: tuple[float, str] | None = None  # (cantidad, unidad) que pide la receta, si la indica
+
+
+class Insuficiente(NamedTuple):
+    """Ingrediente que SÍ tienes (vigente) pero en menor cantidad de la que pide la receta."""
+
+    requerido: str
+    lote: Ingrediente   # el lote que vence primero
+    dias: int
+    necesita: tuple[float, str]  # lo que pide la receta
+    tienes: tuple[float, str]    # lo que hay en total, expresado en la unidad de la receta
 
 
 @dataclass(frozen=True)
 class Sugerencia:
     receta: Receta
-    usados: tuple[Uso, ...]                  # lo que ya tienes
+    usados: tuple[Uso, ...]                  # lo que ya tienes (en cantidad suficiente)
     faltantes: tuple[str, ...]               # lo que no tienes (o solo tienes vencido)
     descartados_por_vencidos: tuple[str, ...]  # subconjunto de faltantes: lo tienes pero VENCIDO
     puntaje: int
-    dias_mas_urgente: int                    # días del lote que vence primero entre los usados
+    dias_mas_urgente: int                    # días del lote que vence primero entre los que usarías
+    insuficientes: tuple[Insuficiente, ...] = ()  # lo tienes, pero en poca cantidad (solo recetas con cantidades)
 
     @property
     def completa(self) -> bool:
-        return not self.faltantes
+        return not self.faltantes and not self.insuficientes
 
     @property
-    def uso_mas_urgente(self) -> Uso:
-        return min(self.usados, key=lambda u: u.dias)
+    def total_ingredientes(self) -> int:
+        return len(self.usados) + len(self.insuficientes) + len(self.faltantes)
+
+    @property
+    def uso_mas_urgente(self):
+        """El ingrediente (suficiente o no) cuyo lote vence primero. Tiene .lote y .dias."""
+        return min(self.usados + self.insuficientes, key=lambda u: u.dias)
+
+
+def _cantidad_total(lotes: list[Ingrediente], unidad: str) -> float | None:
+    """Suma lo que hay de un ingrediente expresado en `unidad` (convierte kg↔g y L↔ml).
+    Devuelve None si ninguna de las unidades que tienes se puede comparar con esa."""
+    total, comparable = 0.0, False
+    for lote in lotes:
+        convertida = convertir_cantidad(lote.cantidad, lote.unidad, unidad)
+        if convertida is not None:
+            total += convertida
+            comparable = True
+    return total if comparable else None
 
 
 def _puntos(dias: int) -> int:
@@ -122,6 +152,11 @@ def sugerir_recetas(
       los pide, se listan como faltantes y se avisa que lo que tienes está vencido.
     * Si hay varios lotes del mismo ingrediente se usa el que vence primero.
     * Solo se sugieren recetas donde tengas al menos un ingrediente.
+    * Si la receta indica cantidades (las recetas propias del usuario), se compara con lo que
+      hay sumando todos los lotes vigentes: si falta cantidad, el ingrediente se reporta como
+      «insuficiente». Si las unidades no se pueden comparar (p. ej. «2 unidades» contra
+      «500 g») no se puede saber y se da por disponible. Las recetas predefinidas no indican
+      cantidades, así que se comportan exactamente igual que antes.
     * Orden: más puntaje primero (privilegia ingredientes próximos a vencer), luego
       las que menos ingredientes faltan, luego alfabético.
     """
@@ -132,35 +167,49 @@ def sugerir_recetas(
     sugerencias: list[Sugerencia] = []
     for receta in recetas:
         usados: list[Uso] = []
+        insuficientes: list[Insuficiente] = []
         faltantes: list[str] = []
         descartados: list[str] = []
 
-        for requerido in receta.ingredientes:
+        for indice, requerido in enumerate(receta.ingredientes):
+            necesita = receta.cantidades[indice] if indice < len(receta.cantidades) else None
             lotes = [i for i in vigentes if coincide_ingrediente(requerido, i.nombre)]
             if lotes:
                 # FIFO: gasta primero el lote que vence antes.
                 lote = min(lotes, key=lambda i: (i.vencimiento, normalizar(i.nombre)))
-                usados.append(Uso(requerido, lote, dias_para_vencer(lote, hoy)))
+                dias = dias_para_vencer(lote, hoy)
+                if necesita is not None:
+                    tiene = _cantidad_total(lotes, necesita[1])
+                    if tiene is not None and tiene + 1e-9 < necesita[0]:
+                        insuficientes.append(
+                            Insuficiente(requerido, lote, dias, necesita, (tiene, necesita[1]))
+                        )
+                        continue
+                usados.append(Uso(requerido, lote, dias, necesita))
             else:
                 faltantes.append(requerido)
                 if any(coincide_ingrediente(requerido, i.nombre) for i in vencidos):
                     descartados.append(requerido)
 
-        if not usados:
+        if not usados and not insuficientes:
             continue  # no tienes nada para esta receta: no tiene sentido sugerirla
-        if solo_completas and faltantes:
+        if solo_completas and (faltantes or insuficientes):
             continue
 
+        aprovechados = usados + insuficientes  # los dos usarían algo de tu despensa
         sugerencias.append(
             Sugerencia(
                 receta=receta,
                 usados=tuple(usados),
                 faltantes=tuple(faltantes),
                 descartados_por_vencidos=tuple(descartados),
-                puntaje=sum(_puntos(u.dias) for u in usados),
-                dias_mas_urgente=min(u.dias for u in usados),
+                puntaje=sum(_puntos(u.dias) for u in aprovechados),
+                dias_mas_urgente=min(u.dias for u in aprovechados),
+                insuficientes=tuple(insuficientes),
             )
         )
 
-    sugerencias.sort(key=lambda s: (-s.puntaje, len(s.faltantes), normalizar(s.receta.nombre)))
+    sugerencias.sort(
+        key=lambda s: (-s.puntaje, len(s.faltantes) + len(s.insuficientes), normalizar(s.receta.nombre))
+    )
     return sugerencias

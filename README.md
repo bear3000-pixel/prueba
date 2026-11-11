@@ -6,10 +6,16 @@ Solución al reto **Food Saver** del evento *Prompt & Solve*: una aplicación de
 - Registra ingredientes con **cantidad, unidad y fecha de vencimiento**, y permite **editarlos y eliminarlos**.
 - Los **ordena por vencimiento** (el que vence primero, arriba) y resalta los que están por vencer (≤ 3 días).
 - Los **vencidos van en una lista aparte** y se **excluyen de las recetas**.
-- **Sugiere recetas** de una colección predefinida (17), priorizando las que aprovechan lo que está por
-  vencer, e indica **qué ingredientes faltan**.
-- **Rechaza datos inválidos** (cantidad 0, negativa, con letras…, fechas que no existen) con un mensaje claro.
-- **Guarda los datos** y siguen ahí al cerrar y volver a abrir el programa.
+- **Sugiere recetas** de una colección predefinida (17) más **las que crea el usuario**, priorizando las que
+  aprovechan lo que está por vencer, e indica **qué ingredientes faltan**.
+- **Recetas propias:** el usuario crea sus recetas con nombre, **ingredientes con cantidad y unidad** y **pasos de
+  preparación**; puede editarlas y eliminarlas. La sugerencia compara las cantidades con la despensa (convierte
+  kg↔g y L↔ml) y avisa «pide 500 g, tienes 300 g».
+- **Fecha con barras automáticas:** al escribir `02112026` el campo muestra `02/11/2026`, solo acepta números y
+  avisa en el momento si la fecha completa no existe.
+- **Rechaza datos inválidos** (cantidad 0, negativa, nula, con letras…, fechas que no existen) con un mensaje claro,
+  tanto al agregar ingredientes como al crear recetas.
+- **Guarda los datos** (ingredientes y recetas propias) y siguen ahí al cerrar y volver a abrir el programa.
 
 Está hecha solo con la biblioteca estándar de Python (tkinter): no hay dependencias que instalar para usarla.
 
@@ -50,16 +56,18 @@ Los datos se guardan en `%APPDATA%\FoodSaver\ingredientes.json` (si algo falla, 
 main.py                    Punto de entrada (lo que empaqueta PyInstaller)
 food_saver/
   modelo.py                Ingrediente + validaciones + estado (vencido / por vencer) + formato de texto
-  logica.py                Ordenar, separar vencidos y sugerir recetas  (funciones puras)
-  recetas.py               Colección predefinida de recetas
+  logica.py                Ordenar, separar vencidos y sugerir recetas (compara cantidades)  (funciones puras)
+  recetas.py               Colección predefinida de recetas y la definición de «Receta»
+  recetas_usuario.py       Recetas propias: validaciones (cantidades, pasos, nombres) y su archivo JSON
   almacenamiento.py        Guardar / cargar JSON (escritura atómica, archivo dañado no rompe la app)
   ejemplos.py              Datos de ejemplo para la demo (fechas relativas a hoy)
-  app.py                   Interfaz tkinter ORIGINAL: dibuja y conecta botones (no se modificó)
+  app.py                   Interfaz tkinter ORIGINAL: dibuja y conecta botones
+  dialogos.py              Ventanas «Crear / editar mi receta» y «Mis recetas»
   app_visual.py            Apariencia renovada: hereda de app.py y solo cambia cómo se ve
   tema.py                  Colores, tipografía y estilos de la apariencia renovada
   icono.py                 Icono de la ventana (generado por assets/generar_icono.py)
 assets/icono.ico           Icono del .exe
-tests/                     82 pruebas automáticas (python -m unittest discover -s tests)
+tests/                     190 pruebas automáticas (python -m unittest discover -s tests)
 CASOS_DE_PRUEBA.md         Casos de prueba MANUALES con datos exactos y resultado esperado
 build_exe.bat              Crea el .exe en Windows
 .github/workflows/         Crea el .exe en GitHub Actions
@@ -70,14 +78,27 @@ reciben la fecha de «hoy» como parámetro, por eso se pueden probar sin abrir 
 
 ### La apariencia está separada del comportamiento
 
-La mejora visual **no modifica ninguna función existente**: `app.py`, `modelo.py`, `logica.py`, `recetas.py`,
-`almacenamiento.py` y `ejemplos.py` quedaron tal cual. `app_visual.py` define una clase que **hereda** de la
-original y, una vez construida la ventana, cambia colores, tipografía, botones y distribución; además agrega un
-encabezado con el logo y un resumen (cuántos ingredientes hay, por vencer y vencidos).
+La mejora visual **no modifica ninguna función existente**. `app_visual.py` define una clase que **hereda** de la
+original (`app.py`) y, una vez construida la ventana, cambia colores, tipografía, botones y distribución; además
+agrega un encabezado con el logo y un resumen (cuántos ingredientes hay, por vencer y vencidos).
 
 Solo se extienden dos funciones, y ambas llaman primero a la original con `super()`:
 `refrescar` (para actualizar el resumen del encabezado) y `_mostrar_mensaje` (para pintar la caja del mensaje).
 Una prueba automática (`test_solo_se_extienden_las_funciones_documentadas`) falla si alguien sustituye otra.
+
+### Qué se tocó al agregar la fecha automática y las recetas propias
+
+Estas dos funciones **sí** necesitaron integrarse en el código existente. Se hizo con cambios **aditivos**: lo que
+ya había se comporta igual (las pruebas de antes pasan sin cambios, con la versión original y con la renovada).
+
+| Archivo | Qué cambió |
+|---|---|
+| `modelo.py` | Se agregaron `autoformatear_fecha` y `convertir_cantidad`. No se tocó ninguna función anterior (`parsear_fecha` sigue decidiendo si una fecha existe). |
+| `recetas.py` | `Receta` ganó 3 campos **opcionales** (`cantidades`, `propia`, `id`). Las 17 recetas predefinidas no cambian. |
+| `logica.py` | `sugerir_recetas` compara cantidades **solo si la receta las trae** (las propias). Las predefinidas dan exactamente los mismos resultados. |
+| `almacenamiento.py` | La escritura atómica se extrajo a `escribir_json_atomico` para reutilizarla; `guardar` hace lo mismo que antes. |
+| `app.py` | Conexión del campo de fecha, botones «+ Crear mi receta» / «Mis recetas», lista de sugerencias con las recetas propias (★) y detalle con cantidades. |
+| `recetas_usuario.py`, `dialogos.py` | **Archivos nuevos**: validación y guardado de recetas propias, y sus ventanas. |
 
 ### Requisito del reto → dónde está → qué prueba lo comprueba
 
@@ -94,6 +115,11 @@ Una prueba automática (`test_solo_se_extienden_las_funciones_documentadas`) fal
 | Colección pequeña de recetas | `recetas.RECETAS` | `test_recetas_predefinidas_son_consistentes` |
 | **Conservar datos** al reabrir | `almacenamiento.py` | `test_se_guarda_en_disco_y_sobrevive_al_reabrir`, `test_archivo_danado_no_rompe_y_se_respalda` |
 | Manejar errores comunes de entrada | `modelo.validar_*`, `parsear_fecha` | `test_fechas_invalidas`, `test_nombre_y_fecha_invalidos` |
+| *(extra)* Fecha con barras automáticas | `modelo.autoformatear_fecha`, `app._al_escribir_fecha` | `PruebasAutoformatoFecha`, `PruebasFechaAutomatica` |
+| *(extra)* Crear recetas propias (nombre, ingredientes con cantidad, pasos) | `recetas_usuario.crear_receta`, `dialogos.DialogoReceta` | `PruebasCrearReceta`, `test_crear_una_receta` |
+| *(extra)* Sin cantidades negativas, nulas ni inválidas en las recetas | `modelo.validar_cantidad` (reutilizada) | `test_cantidades_invalidas_se_rechazan`, `test_las_cantidades_invalidas_no_se_agregan_a_la_receta` |
+| *(extra)* Comparar cantidades con la despensa | `logica.sugerir_recetas`, `modelo.convertir_cantidad` | `PruebasCantidadesEnSugerencias`, `test_se_compara_la_cantidad_con_la_despensa` |
+| *(extra)* Editar / eliminar recetas propias y conservarlas | `app.guardar_receta_propia`, `recetas_usuario.cargar` | `test_editar_una_receta`, `test_eliminar_una_receta`, `test_las_recetas_propias_sobreviven_al_reabrir` |
 
 ---
 
@@ -111,6 +137,10 @@ aproveche uno próximo a vencer»*.
    *Aprovecha: Tomates (en 2 días)*. Ábrela para ver ingredientes y preparación. El pollo vencido **no** se usa.
 5. Marca *«solo recetas que puedo cocinar ya»* → quedan solo las completas.
 6. **Editar** (doble clic en una fila) y **cerrar y reabrir** el programa → los datos siguen ahí.
+7. **Fecha automática:** al agregar un ingrediente, escribe en «Vence» solo `02112026` → aparece `02/11/2026`.
+8. **Receta propia:** pulsa **+ Crear mi receta**, ponle nombre, agrega ingredientes con cantidad (prueba una cantidad
+   `0` o `-3` → la rechaza) y escribe los pasos, uno por línea. Al guardar aparece con una ★ entre las sugerencias;
+   si pides más cantidad de la que tienes, el detalle dice «pide 500 g, tienes 300 g».
 
 Atajo: el botón **Cargar ejemplo** llena todo con datos ficticios cuyas fechas se calculan respecto a hoy.
 
@@ -121,8 +151,9 @@ Atajo: el botón **Cargar ejemplo** llena todo con datos ficticios cuyas fechas 
 Estas son decisiones que tomó el código y que conviene que el equipo entienda y pueda defender:
 
 - **Vencido = fecha anterior a hoy.** Un ingrediente que vence *hoy* todavía cuenta como utilizable. *(modelo.esta_vencido)*
-- **Las recetas piden ingredientes por nombre, no por cantidad.** No se compara cuánto necesita la receta
-  contra cuánto hay, ni se convierten unidades. Es suficiente para el reto, pero es un límite.
+- **Las 17 recetas predefinidas piden ingredientes por nombre, no por cantidad.** Las **recetas propias** sí
+  traen cantidades y se comparan con la despensa (sumando todas las compras vigentes). Solo se convierten
+  kg↔g y L↔ml; si la receta pide «3 unidades» y tienes «500 g» no se puede saber y se da por disponible.
 - **Coincidencia de nombres:** ignora mayúsculas, acentos y plurales (`Tomates` = `tomate`, `Limón` = `limones`)
   y acepta nombres más largos (`Leche entera` sirve para `leche`). Falso positivo conocido: `pasta de tomate`
   contaría como `tomate`. *(logica.coincide_ingrediente)*
@@ -154,7 +185,7 @@ Estas son decisiones que tomó el código y que conviene que el equipo entienda 
 | **Experiencia de usuario y acabado** (15 %) | Interfaz renovada: encabezado con resumen, estados con **texto y color** (no solo color), mensajes de error/éxito en una caja visible, botones con jerarquía, buen contraste, zoom alto y ventana adaptada a la pantalla. Los errores comunes de entrada (cantidad inválida, fecha inexistente, campos vacíos, archivo dañado) se explican sin romper la app. |
 | **Descomposición de tareas** (15 %) | El código se divide por responsabilidad (modelo, lógica, recetas, almacenamiento, pantalla, apariencia) y la mejora visual se hizo como una capa aparte, sin tocar lo que ya funcionaba. |
 | **Gestión del contexto** (15 %) | El documento del reto se tradujo a requisitos concretos (sección 3), límites conocidos (sección 5) y reglas explícitas. |
-| **Verificación y depuración** (20 %) | 82 pruebas automáticas, `CASOS_DE_PRUEBA.md`, comparación entre la versión original y la renovada, y compilación + prueba automática en Windows. |
+| **Verificación y depuración** (20 %) | 190 pruebas automáticas, `CASOS_DE_PRUEBA.md`, comparación entre la versión original y la renovada, y compilación + prueba automática en Windows. |
 
 > Los tres últimos criterios también evalúan **cómo trabajó el equipo con el agente de IA** (qué pidió, qué revisó,
 > qué corrigió). Esta tabla muestra la evidencia que deja el repositorio; la explicación del proceso la tiene que

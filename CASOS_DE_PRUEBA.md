@@ -3,12 +3,16 @@
 Sirven para **comprobar la app con sus propias manos** antes de presentarla y, si el jurado pregunta
 «¿cómo verificaron que funciona?», para mostrar qué se probó y qué resultado se esperaba.
 
-> Complementan las 82 pruebas automáticas (`python -m unittest discover -s tests`).
-> Los resultados esperados de los grupos **A–E, G1–G4, H e I1–I5** se obtuvieron ejecutando cada caso contra la
-> aplicación real, con la fecha de «hoy» fijada en el 11/11/2026, **con la versión original y con la de apariencia
-> renovada: las salidas fueron idénticas**. Los grupos **F, G5, G6, I6 e I7** dependen de tu computador (archivos de
-> Windows, tamaño y zoom de pantalla, icono) y no se pudieron probar a mano antes de escribirlos: son justo lo que
-> conviene mirar tú en Windows.
+> Complementan las 190 pruebas automáticas (`python -m unittest discover -s tests`).
+> Los resultados esperados de los grupos **A–E, G1–G4, H, I1–I5, J y K** se obtuvieron ejecutando cada caso contra
+> la aplicación real, con la fecha de «hoy» fijada en el 11/11/2026 (los de A–I, con la versión original y con la de
+> apariencia renovada: las salidas fueron idénticas). Los grupos **F, G5, G6, I6 e I7** dependen de tu computador
+> (archivos de Windows, tamaño y zoom de pantalla, icono) y no se pudieron probar a mano antes de escribirlos: son
+> justo lo que conviene mirar tú en Windows.
+>
+> **Novedad:** la fecha de vencimiento se escribe solo con números y el campo pone las barras (grupo **J**), y
+> ahora se pueden crear recetas propias (grupo **K**). Por eso los casos A12, B2 y B3 cambiaron respecto a la
+> versión anterior de este documento.
 
 ## Cómo usar este documento
 
@@ -56,8 +60,8 @@ Usa Unidad = `L` y, salvo que se indique, Vence = `HOY+1` (12/11/2026).
 | A8 | *(vacío)* | `1` | HOY+1 | Escribe el nombre del ingrediente. | |
 | A9 | `123` | `1` | HOY+1 | El nombre debe contener letras. | |
 | A10 | Leche | `1` | *(vacío)* | Escribe la fecha de vencimiento (DD/MM/AAAA). | |
-| A11 | Leche | `1` | `31/02/2026` | Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista. | |
-| A12 | Leche | `1` | `mañana` | Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista. | |
+| A11 | Leche | `1` | `31/02/2026` | Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista. *(aparece apenas termines de escribir la fecha, y se repite al pulsar Agregar)* | |
+| A12 | Leche | `1` | `mañana` | **El campo no deja escribir letras** (queda vacío). Al pulsar *Agregar*: Escribe la fecha de vencimiento (DD/MM/AAAA). | |
 | A13 | Leche | `1` | `12/11/26` | Fecha no válida. Usa DD/MM/AAAA… *(el año debe tener 4 dígitos)* | |
 | A14 | Leche | `1` | `25/12/0226` | El año del vencimiento debe estar entre 2000 y 2100. | |
 
@@ -70,8 +74,8 @@ Agrega estos cuatro en orden (Unidad según la tabla).
 | ID | Ingrediente | Cantidad | Unidad | Vence | Resultado esperado | Resultado |
 |---|---|---|---|---|---|---|
 | B1 | `Leche entera` escrito con **2 espacios antes, 3 entre las palabras y 1 después** | `1,5` | L | HOY+2 | Mensaje verde «Leche entera» agregado. Se ve **`Leche entera`** (sin espacios sobrantes) y **`1,5 L`** | |
-| B2 | Aceite | `1.5` | L | `2026-11-20` | Acepta punto decimal y fecha AAAA-MM-DD. Se ve `1,5 L` y `20/11/2026` | |
-| B3 | Sal | `2` | kg | `20-11-2026` | Acepta fecha DD-MM-AAAA. Se ve `20/11/2026` | |
+| B2 | Aceite | `1.5` | L | **pega** (Ctrl+V) `2026-11-20` | Acepta punto decimal. La fecha pegada en formato AAAA-MM-DD se convierte sola: se ve `1,5 L` y `20/11/2026` | |
+| B3 | Sal | `2` | kg | `20-11-2026` (escrito con guiones) | Los guiones se cambian por barras. Se ve `20/11/2026` | |
 | B4 | Pan | `1` | paquetes | `5/12/2026` | Acepta día/mes sin cero. Se ve **`1 paquete`** (singular) y `05/12/2026` | |
 
 Tras agregar los cuatro, en **Vigentes** el orden debe ser: Leche entera, Aceite, Sal, Pan
@@ -113,7 +117,7 @@ Parte de cero. Agrega: **Huevos** 6 unidades HOY+5 · **Queso** 200 g HOY+10 · 
 | D1.1 | Primera receta de la lista | **Omelette de queso y tomate** · Tienes `3 de 3` · Aprovecha `Tomates (en 2 días)` (fila resaltada) | |
 | D1.2 | Panel de detalle de esa receta | `✔ Tienes todos los ingredientes: puedes cocinarla ya.` · «Lo que usarías»: Tomates (4 unidades) — vence en 2 días; Huevos (6 unidades) — vence en 5 días; Queso (200 g) — vence en 10 días · y 4 pasos de preparación | |
 | D1.3 | Siguientes recetas | En este orden: Ensalada de atún (`1 de 4`), Pasta con salsa de tomate (`1 de 4`), Guiso de lentejas (`1 de 5`) | |
-| D1.4 | Casilla **«Mostrar solo recetas que puedo cocinar ya»** marcada | Queda **una sola** receta: Omelette de queso y tomate | |
+| D1.4 | Casilla **«Solo recetas que puedo cocinar ya»** marcada | Queda **una sola** receta: Omelette de queso y tomate | |
 | D1.5 | Desmarcar la casilla | Vuelve la lista completa | |
 
 ### D2. Un ingrediente vencido NO se usa en recetas
@@ -123,7 +127,7 @@ Parte de cero. Agrega: **Pollo** 500 g HOY-1 · **Arroz** 1 kg HOY+30 · **Zanah
 |---|---|---|---|
 | D2.1 | Primera receta | **Arroz con pollo y verduras** · Tienes `3 de 4` · Aprovecha `Zanahorias (en 3 días)` | |
 | D2.2 | Detalle de esa receta | `Te faltan 1 ingrediente(s).` · «Lo que usarías»: Zanahorias, Cebolla, Arroz (**el pollo NO aparece aquí**) · «Te faltan»: **`Pollo (lo tienes, pero está vencido)`** | |
-| D2.3 | Casilla «solo recetas que puedo cocinar ya» marcada | La lista queda vacía y el panel dice: *Ninguna receta se puede cocinar completa con lo que tienes vigente. Desmarca la casilla para ver recetas con ingredientes faltantes.* | |
+| D2.3 | Casilla «Solo recetas que puedo cocinar ya» marcada | La lista queda vacía y el panel dice: *Ninguna receta se puede cocinar completa con lo que tienes vigente. Desmarca la casilla para ver recetas con ingredientes faltantes.* | |
 
 ### D3. Reconoce nombres escritos de formas distintas
 Parte de cero. Agrega: **LIMONES** 3 unidades HOY+9 · **Plátanos** 2 unidades HOY+3 · **tomate** 1 unidades HOY+3 ·
@@ -204,7 +208,7 @@ Parte de cero y pulsa **Cargar ejemplo**.
 | H3 | Vigentes, de arriba abajo | Espinaca, Leche, Pan de molde, Tomates, Huevos, Zanahorias, Queso, Cebolla, Papas, Arroz | |
 | H4 | Vencidos | Yogur (hace 3 días) y Pollo (hace 1 día) | |
 | H5 | Primeras recetas | 1.ª **Tostadas francesas** `3 de 3` · `Pan de molde (en 2 días)` — 2.ª **Huevos revueltos con espinaca** `3 de 3` · `Espinaca (mañana)` — 3.ª **Omelette de queso y tomate** `3 de 3` · `Tomates (en 3 días)` | |
-| H6 | Casilla «solo recetas que puedo cocinar ya» | Quedan 4: Tostadas francesas, Huevos revueltos con espinaca, Omelette de queso y tomate, Arroz frito con huevo | |
+| H6 | Casilla «Solo recetas que puedo cocinar ya» | Quedan 4: Tostadas francesas, Huevos revueltos con espinaca, Omelette de queso y tomate, Arroz frito con huevo | |
 | H7 | Pollo y Yogur (vencidos) | **No aparecen** como ingredientes usados en ninguna receta | |
 
 *(Los resultados de H no dependen del día: los vencimientos de ejemplo se calculan respecto a hoy.)*
@@ -224,6 +228,117 @@ El encabezado verde de arriba muestra tres «chips» con el **resumen** de tu de
 | I5 | **Mensajes en caja de color.** Escribe cantidad `0` y pulsa *Agregar*; luego agrega un ingrediente válido | El error sale en una **caja rosada** con letra roja en negrita; el éxito, en una **caja verde clara**. El texto es el mismo de los grupos A y B | |
 | I6 | **Versión clásica.** Abre la app con `python main.py --clasico` (desde el código fuente) | Se ve la apariencia original, sin encabezado verde, y **todo lo demás funciona igual** (repite D1 y E3) | |
 | I7 | **Icono (solo Windows).** Mira el archivo `FoodSaver.exe` en el Explorador, la barra de título y la barra de tareas | Aparece el icono de la **hoja blanca sobre fondo verde** | |
+
+---
+
+## J. Fecha de vencimiento con barras automáticas
+
+En el campo **Vence**, escribe **solo números**: el programa pone las barras. Sirve tanto al agregar un ingrediente
+como al editarlo. Las fechas siguen siendo comprobadas igual que antes (que el día exista, etc.).
+
+| ID | Qué hacer | Resultado esperado | Resultado |
+|---|---|---|---|
+| J1 | Escribe despacio `02112026` | Al escribir `02` aparece `02/`; al llegar a `0211`, `02/11/`; al final, **`02/11/2026`** | |
+| J2 | Escribe `2/11/2026` (con las barras tú mismo) | Queda **`02/11/2026`** (completa el cero del día) | |
+| J3 | Con `02/11/` escrito, pulsa **Retroceso** varias veces | Borra de a uno y **las barras no reaparecen** solas: `02/11` → `02/1` → `02/` → `02` | |
+| J4 | Escribe `mañana`; luego borra y escribe `1a2b` | `mañana` no deja escribir nada (queda vacío); `1a2b` queda `12/` (solo toma los números) | |
+| J5 | Escribe `0211202699` (10 dígitos) | Queda `02/11/2026`: **no pasa de 8 dígitos** | |
+| J6 | Escribe `31022026` (31 de febrero) | Queda `31/02/2026` y **al instante** sale en rojo: Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista. | |
+| J7 | Borra todo y escribe `28022026` | Queda `28/02/2026` y el aviso rojo **desaparece solo** | |
+| J8 | Escribe `01132026` (mes 13) | Aviso rojo de fecha no válida | |
+| J9 | Escribe `25120226` (año 0226) | Aviso rojo: El año del vencimiento debe estar entre 2000 y 2100. | |
+| J10 | Escribe `021126` (año de 2 dígitos) y pulsa **Agregar** con nombre y cantidad válidos | Queda `02/11/26` y al agregar: Fecha no válida… *(el año necesita 4 dígitos)*. No se agrega nada | |
+| J11 | Llena nombre `Leche`, cantidad `1` y escribe `02112026`; pulsa **Agregar** | «Leche» agregado. Aparece con vencimiento `02/11/2026` (en **Vencidos** si esa fecha ya pasó, en Vigentes si no) y el formulario queda vacío | |
+| J12 | Selecciona un ingrediente y pulsa **Editar** | La fecha aparece ya con barras (`DD/MM/AAAA`) y puedes cambiar solo un dígito sin que se desordene | |
+
+---
+
+## K. Recetas propias
+
+El panel de recetas tiene dos botones nuevos: **+ Crear mi receta** y **Mis recetas**. Una receta tiene: nombre,
+**ingredientes (cada uno con cantidad y unidad)** y **pasos de preparación**. Las recetas propias se marcan con **★**.
+Para estos casos usa **Borrar todo** antes de empezar. En el cuadro, el botón principal se llama **Guardar receta**.
+
+### K1. Validaciones al agregar un ingrediente a la receta
+Abre **+ Crear mi receta**, escribe `Harina` y una cantidad, y pulsa **Agregar ingrediente**. En todos estos casos el
+ingrediente **no se agrega** y sale un aviso rojo.
+
+| ID | Cantidad escrita | Aviso esperado | Resultado |
+|---|---|---|---|
+| K1.1 | *(vacía)* | Falta la cantidad de «Harina». | |
+| K1.2 | `0` | La cantidad debe ser mayor que cero. | |
+| K1.3 | `-5` | La cantidad debe ser mayor que cero. | |
+| K1.4 | `abc` | La cantidad debe ser un número (por ejemplo 2 o 1,5). | |
+| K1.5 | `1e3` | La cantidad debe ser un número (por ejemplo 2 o 1,5). | |
+| K1.6 | `5000000` | La cantidad es demasiado grande (máximo 1.000.000). | |
+| K1.7 | `0,0001` | La cantidad debe ser mayor que cero. | |
+| K1.8 | Nombre vacío y cantidad `5` | Escribe el nombre del ingrediente. | |
+| K1.9 | Nombre `123` y cantidad `5` | El nombre debe contener letras. | |
+| K1.10 | `Harina` `500` **g** y luego `HARINAS` `2` | La primera se agrega («Harina» agregado a la receta.). La segunda: «HARINAS» ya está en la lista de ingredientes. | |
+| K1.11 | `Azúcar` `1,5` **tazas** | Se agrega y en la lista se ve `1,5 tazas` | |
+
+### K2. Validaciones al guardar la receta
+| ID | Qué hacer | Aviso esperado (el cuadro **no se cierra**) | Resultado |
+|---|---|---|---|
+| K2.1 | Pulsa **Guardar receta** sin escribir nada | Escribe el nombre de la receta. | |
+| K2.2 | Solo el nombre `Mi receta` | Agrega al menos un ingrediente a la receta. | |
+| K2.3 | Nombre + 1 ingrediente, sin pasos | Escribe al menos un paso de preparación. | |
+| K2.4 | Escribe `Azúcar` y `5` arriba **pero no pulsas** *Agregar ingrediente*, y guardas | Tienes un ingrediente escrito que no has agregado. Pulsa «Agregar ingrediente» o borra lo escrito. *(así no se pierde un dato sin avisar)* | |
+| K2.5 | Nombre `omelette de queso y tomate` (ya existe una predefinida) | Ya existe una receta llamada «omelette de queso y tomate». Elige otro nombre. | |
+| K2.6 | Nombre `123` | El nombre de la receta debe contener letras. | |
+| K2.7 | Nombre de 61 letras | El nombre de la receta es demasiado largo (máximo 60 caracteres). | |
+| K2.8 | Pasos `123` y `456` (solo números) | El paso 1 debe contener texto. | |
+
+### K3. Crear una receta que se usa
+Agrega a la despensa **Harina** 1 kg (HOY+2) y **Agua** 1 L (HOY+30). Pulsa **+ Crear mi receta**:
+nombre `Pan casero`; ingredientes `Harina` `500` g y `Agua` `300` ml; en *Preparación* escribe tres líneas:
+`1. Mezclar todo`, `2) Amasar`, `- Hornear 30 minutos`; **Guardar receta**.
+
+| ID | Qué mirar | Resultado esperado | Resultado |
+|---|---|---|---|
+| K3.1 | Mensaje bajo el formulario | Receta «Pan casero» guardada. Ya aparece en las recetas sugeridas. | |
+| K3.2 | Primera fila de recetas | **`★ Pan casero`** · Tienes `2 de 2` · Aprovecha `Harina (en 2 días)` | |
+| K3.3 | Panel de detalle | `★ Pan casero` · *Receta creada por ti* · ✔ Tienes todos los ingredientes · «Lo que usarías»: **Harina (1 kg) — vence en 2 días — la receta pide 500 g** y **Agua (1 L) — vence en 30 días — la receta pide 300 ml** | |
+| K3.4 | Pasos | Se ven numerados `1. Mezclar todo`, `2. Amasar`, `3. Hornear 30 minutos` (**sin números repetidos**: se quitó la numeración que escribiste) | |
+| K3.5 | Unidades distintas | Se compararon bien aunque la despensa esté en **kg** y **L** y la receta en **g** y **ml** | |
+
+### K4. La receta compara cantidades con lo que tienes
+| ID | Despensa | Resultado esperado | Resultado |
+|---|---|---|---|
+| K4.1 | **Harina** `300` g (HOY+4) y **Agua** 1 L (HOY+4); receta Pan casero (500 g y 300 ml) | Fila `★ Pan casero` · `1 de 2`. Detalle: *Te faltan 1 ingrediente(s).* · «Lo tienes, pero en poca cantidad»: **Harina: pide 500 g, tienes 300 g (te faltan 200 g)**. No dice «puedes cocinarla ya» | |
+| K4.2 | La misma, con la casilla **«Solo recetas que puedo cocinar ya»** marcada | La receta **desaparece** (no se puede cocinar completa) | |
+| K4.3 | **Harina** 1 kg **vencida** (HOY-2) y **Agua** 1 L vigente | Detalle: «Te faltan»: **Harina — pide 500 g (lo tienes, pero está vencido)**. La harina vencida no se usa | |
+| K4.4 | Solo **Tomate** `500` g y una receta que pide **Tomate** `3` unidades | Se da por disponible (`1 de 1`): **no se pueden comparar «unidades» con «g»**, así que no bloquea | |
+| K4.5 | Sin ningún ingrediente en la despensa, crea una receta | Mensaje: Receta «…» guardada. Aparecerá en las sugerencias cuando tengas alguno de sus ingredientes (vigente) en la despensa. | |
+
+### K5. Editar el cuadro mientras armas la receta
+| ID | Acción | Resultado esperado | Resultado |
+|---|---|---|---|
+| K5.1 | En la lista de ingredientes de la receta, **doble clic** sobre `Harina` | Sus datos pasan a las casillas de arriba, el botón dice **Guardar cambio** y el aviso: Editando «Harina». Cambia lo que necesites y pulsa «Guardar cambio». | |
+| K5.2 | Pon cantidad `0` y pulsa **Guardar cambio** | Aviso rojo; la harina **conserva** su cantidad anterior | |
+| K5.3 | Pon cantidad `750` y pulsa **Guardar cambio** | «Harina» actualizado. La lista muestra `750 g` y el botón vuelve a *Agregar ingrediente* | |
+| K5.4 | Selecciona un ingrediente y pulsa **Quitar seleccionado** | «…» quitado de la receta. Desaparece de la lista | |
+| K5.5 | Pulsa **Quitar seleccionado** sin elegir ninguno | Selecciona un ingrediente de la lista para quitarlo. | |
+| K5.6 | Con la receta a medias, pulsa **Cancelar**, la tecla **Esc** o la **X** de la ventana | Pregunta: *Tienes cambios sin guardar en esta receta. ¿Quieres cerrar y perderlos?* Con **No** sigues editando; con **Sí** se cierra y **no se guarda nada** | |
+| K5.7 | Abre el cuadro y ciérralo sin escribir nada (o abre una receta para editar y no cambies nada) | Se cierra **sin preguntar** | |
+
+### K6. Administrar «Mis recetas»
+| ID | Acción | Resultado esperado | Resultado |
+|---|---|---|---|
+| K6.1 | Pulsa **Mis recetas** sin haber creado ninguna | Lista vacía y el texto: Todavía no has creado ninguna receta. Pulsa «+ Nueva receta» para empezar. Los botones Editar y Eliminar están **grises** | |
+| K6.2 | Con `Pan casero` creada | Una fila: `Pan casero` · Ingredientes `2` · Pasos `3` | |
+| K6.3 | Con la lista abierta, crea otra receta desde **+ Crear mi receta** | La lista **se actualiza sola** con la nueva | |
+| K6.4 | Selecciona una receta y pulsa **Editar** (o doble clic) | Se abre el cuadro **con todo lleno** (nombre, ingredientes con cantidad y pasos). Cambia el nombre y guarda: Receta «…» actualizada. **No se duplica** | |
+| K6.5 | Edita una receta y pon el nombre de **otra** que ya tienes | Ya existe una receta llamada «…». Elige otro nombre. *(dejar su propio nombre sí está permitido)* | |
+| K6.6 | Selecciona una receta, **Eliminar** y responde **No** | No se borra nada | |
+| K6.7 | **Eliminar** otra vez y responde **Sí** | Pregunta: ¿Eliminar tu receta «…»? · Mensaje: Receta «…» eliminada. · desaparece de la lista y de las sugerencias | |
+
+### K7. Las recetas propias se conservan
+| ID | Pasos | Resultado esperado | Resultado |
+|---|---|---|---|
+| K7.1 | Crea una receta, cierra la app con la **X** y ábrela otra vez | La receta sigue en **Mis recetas** y vuelve a aparecer (con ★) si tienes ingredientes | |
+| K7.2 | **Archivo dañado.** Cierra la app, abre `%APPDATA%\FoodSaver\recetas_propias.json` con el Bloc de notas, escribe `esto no es json` y guarda; abre la app | La app **abre igual**, con tus ingredientes, y avisa: *El archivo de tus recetas estaba dañado y se empezó con la lista vacía.* + la ruta de la copia `recetas_propias.corrupto` | |
+| K7.3 | Las 17 recetas de siempre | Siguen funcionando igual (las de la demo del grupo D no cambian) | |
 
 ---
 

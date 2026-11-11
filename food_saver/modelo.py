@@ -105,6 +105,72 @@ def parsear_fecha(texto: str) -> date:
     )
 
 
+_DIGITOS = "0123456789"
+_SEPARADORES = "/-."
+
+
+def autoformatear_fecha(texto: str, agregar_barra: bool = False) -> str:
+    """Da formato DD/MM/AAAA MIENTRAS se escribe: '02112026' -> '02/11/2026'.
+
+    * Solo acepta dígitos; letras y otros símbolos se descartan.
+    * Pone las barras solas. Con ``agregar_barra=True`` (cuando el usuario está escribiendo, no
+      borrando) también pone la barra apenas se completa el día o el mes: '02' -> '02/'.
+    * Si el usuario escribe un separador (/, - o .) tras un solo dígito, completa el cero:
+      '2/' -> '02/', y '2/11/2026' -> '02/11/2026'.
+    * Un AAAA-MM-DD pegado completo se convierte: '2026-11-20' -> '20/11/2026'.
+    * Ignora todo lo que sobre después del año (máximo 8 dígitos).
+
+    Solo cambia la FORMA del texto. Que la fecha exista (31/02, mes 13…) lo decide
+    ``parsear_fecha``, que no se modificó.
+    """
+    texto = texto or ""
+    iso = re.fullmatch(r"\s*([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})\s*", texto)
+    if iso:
+        anio, mes, dia = iso.groups()
+        return f"{int(dia):02d}/{int(mes):02d}/{anio}"
+
+    maximos = (2, 2, 4)  # largo de día, mes y año
+    campos = [""]
+    for caracter in texto:
+        actual = len(campos) - 1
+        if caracter in _DIGITOS:
+            if len(campos[actual]) == maximos[actual]:
+                if actual == 2:
+                    break  # el año está completo: lo demás sobra
+                campos.append("")  # el campo se llenó: el dígito pasa al siguiente
+                actual += 1
+            campos[actual] += caracter
+        elif caracter in _SEPARADORES:
+            if campos[actual] == "":
+                continue  # sin barras al comienzo ni dobles
+            if actual == 2:
+                break
+            if len(campos[actual]) == 1:
+                campos[actual] = "0" + campos[actual]
+            campos.append("")
+        # cualquier otro carácter (letras, espacios) se descarta
+
+    resultado = "/".join(campos)
+    ultimo = len(campos) - 1
+    if agregar_barra and ultimo < 2 and len(campos[ultimo]) == maximos[ultimo]:
+        resultado += "/"
+    return resultado
+
+
+# Unidades que se pueden convertir entre sí: familia y cuántas unidades base vale cada una.
+_BASE = {"g": ("masa", 1), "kg": ("masa", 1000), "ml": ("volumen", 1), "L": ("volumen", 1000)}
+
+
+def convertir_cantidad(cantidad: float, de: str, a: str) -> float | None:
+    """Convierte entre kg↔g y L↔ml. Devuelve None si las unidades no se pueden comparar
+    (por ejemplo 'unidades' con 'g')."""
+    if de == a:
+        return float(cantidad)
+    if de in _BASE and a in _BASE and _BASE[de][0] == _BASE[a][0]:
+        return cantidad * _BASE[de][1] / _BASE[a][1]
+    return None
+
+
 # --------------------------------------------------------------------------- #
 # Ingrediente
 # --------------------------------------------------------------------------- #

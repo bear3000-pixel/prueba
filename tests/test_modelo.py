@@ -4,6 +4,8 @@ from datetime import date
 
 from food_saver.modelo import (
     ErrorValidacion,
+    autoformatear_fecha,
+    convertir_cantidad,
     Ingrediente,
     crear_ingrediente,
     describir_vencimiento,
@@ -76,6 +78,68 @@ class PruebasFecha(unittest.TestCase):
                 with self.assertRaises(ErrorValidacion) as contexto:
                     parsear_fecha(texto)
                 self.assertEqual(contexto.exception.campo, "vencimiento")
+
+
+class PruebasAutoformatoFecha(unittest.TestCase):
+    def test_pone_las_barras_solas(self):
+        self.assertEqual(autoformatear_fecha("02112026"), "02/11/2026")
+        self.assertEqual(autoformatear_fecha("0211"), "02/11")
+        self.assertEqual(autoformatear_fecha("021"), "02/1")
+
+    def test_barra_automatica_al_escribir_pero_no_al_borrar(self):
+        self.assertEqual(autoformatear_fecha("02", agregar_barra=True), "02/")
+        self.assertEqual(autoformatear_fecha("0211", agregar_barra=True), "02/11/")
+        self.assertEqual(autoformatear_fecha("02", agregar_barra=False), "02")  # borrando no reaparece la barra
+        self.assertEqual(autoformatear_fecha("02/11/2026", agregar_barra=True), "02/11/2026")  # el año no lleva barra
+
+    def test_completa_ceros_cuando_se_escribe_la_barra(self):
+        self.assertEqual(autoformatear_fecha("2/11/2026"), "02/11/2026")
+        self.assertEqual(autoformatear_fecha("1/1/2026"), "01/01/2026")
+        self.assertEqual(autoformatear_fecha("02/1/"), "02/01/")
+
+    def test_solo_acepta_numeros(self):
+        self.assertEqual(autoformatear_fecha("mañana"), "")
+        self.assertEqual(autoformatear_fecha("ab0c2d", agregar_barra=True), "02/")
+        self.assertEqual(autoformatear_fecha("02/11/2026 "), "02/11/2026")
+
+    def test_ignora_lo_que_sobra(self):
+        self.assertEqual(autoformatear_fecha("123456789"), "12/34/5678")
+        self.assertEqual(autoformatear_fecha("02/11/2026/"), "02/11/2026")
+        self.assertEqual(autoformatear_fecha("//02//11"), "02/11")
+
+    def test_otros_separadores_y_formato_iso_pegado(self):
+        self.assertEqual(autoformatear_fecha("20-11-2026"), "20/11/2026")
+        self.assertEqual(autoformatear_fecha("20.11.2026"), "20/11/2026")
+        self.assertEqual(autoformatear_fecha("2026-11-20"), "20/11/2026")
+
+    def test_no_decide_si_la_fecha_existe(self):
+        # Solo da forma: que 31/02 no existe lo sigue decidiendo parsear_fecha
+        self.assertEqual(autoformatear_fecha("31022026"), "31/02/2026")
+        with self.assertRaises(ErrorValidacion):
+            parsear_fecha(autoformatear_fecha("31022026"))
+        self.assertEqual(parsear_fecha(autoformatear_fecha("02112026")), date(2026, 11, 2))
+
+    def test_es_estable_al_aplicarlo_otra_vez(self):
+        for texto in ["02112026", "2/11/2026", "0211", "02/", "mañana", "2026-11-20", "02/11/26"]:
+            with self.subTest(texto=texto):
+                una_vez = autoformatear_fecha(texto)
+                self.assertEqual(autoformatear_fecha(una_vez), una_vez)
+
+
+class PruebasConversion(unittest.TestCase):
+    def test_masa_y_volumen(self):
+        self.assertEqual(convertir_cantidad(1500, "g", "kg"), 1.5)
+        self.assertEqual(convertir_cantidad(2, "kg", "g"), 2000)
+        self.assertEqual(convertir_cantidad(250, "ml", "L"), 0.25)
+        self.assertEqual(convertir_cantidad(1, "L", "ml"), 1000)
+
+    def test_misma_unidad(self):
+        self.assertEqual(convertir_cantidad(3, "unidades", "unidades"), 3)
+
+    def test_unidades_que_no_se_pueden_comparar(self):
+        self.assertIsNone(convertir_cantidad(3, "unidades", "g"))
+        self.assertIsNone(convertir_cantidad(1, "kg", "L"))
+        self.assertIsNone(convertir_cantidad(1, "tazas", "ml"))
 
 
 class PruebasEstado(unittest.TestCase):
