@@ -1,0 +1,44 @@
+name: Compilar FoodSaver.exe
+
+# Se ejecuta en cada push y también a mano (pestaña Actions -> "Run workflow").
+# Resultado: un .exe de Windows descargable en la sección "Artifacts" de la ejecución.
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar PyInstaller
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Ejecutar pruebas (incluye las de la interfaz)
+        run: python -m unittest discover -s tests -v
+
+      - name: Crear el .exe
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name FoodSaver main.py
+
+      - name: Guardar el .exe como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: FoodSaver-exe
+          path: dist/FoodSaver.exe
+          if-no-files-found: error
+
+      # Prueba de humo: el .exe debe abrir y seguir vivo unos segundos.
+      - name: Probar que el .exe abre
+        shell: pwsh
+        run: |
+          $env:FOODSAVER_DATA = Join-Path $env:RUNNER_TEMP "humo\ingredientes.json"
+          $proceso = Start-Process -FilePath "dist\FoodSaver.exe" -PassThru
+          Start-Sleep -Seconds 10
+          if ($proceso.HasExited) { throw "El .exe se cerró solo (código $($proceso.ExitCode))" }
+          Stop-Process -Id $proceso.Id -Force
+          Write-Host "El .exe abrió correctamente."
