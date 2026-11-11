@@ -69,7 +69,8 @@ def validar_cantidad(texto: str | float | int) -> float:
     if valor <= 0:
         raise ErrorValidacion("La cantidad debe ser mayor que cero.", "cantidad")
     if valor > CANTIDAD_MAXIMA:  # también atrapa el caso float("9999...") == inf
-        raise ErrorValidacion(f"La cantidad es demasiado grande (máximo {CANTIDAD_MAXIMA:,}).", "cantidad")
+        maximo = f"{CANTIDAD_MAXIMA:,}".replace(",", ".")  # 1.000.000 (separador de miles en español)
+        raise ErrorValidacion(f"La cantidad es demasiado grande (máximo {maximo}).", "cantidad")
     return valor
 
 

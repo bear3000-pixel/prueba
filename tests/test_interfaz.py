@@ -156,6 +156,18 @@ class PruebasListas(BaseInterfaz):
         self.assertEqual(self.app.ingredientes, [])
         self.assertEqual(self.filas(self.app.tabla_vigentes), [])
 
+    def test_borrar_todo_concuerda_singular_y_plural(self):
+        self.agregar("Leche", "1", "L", fecha(2))
+        self.app._borrar_todo()
+        self.assertEqual(modulo_app.messagebox.askyesno.call_args.args[1], "¿Borrar el ingrediente guardado?")
+        self.agregar("Leche", "1", "L", fecha(2))
+        self.agregar("Huevos", "6", "unidades", fecha(5))
+        self.app._borrar_todo()
+        self.assertEqual(
+            modulo_app.messagebox.askyesno.call_args.args[1], "¿Borrar los 2 ingredientes guardados?"
+        )
+        self.assertEqual(self.app.ingredientes, [])
+
     def test_botones_editar_y_eliminar_solo_con_seleccion(self):
         self.assertEqual(str(self.app.boton_editar.cget("state")), "disabled")
         self.agregar("Leche", "1", "L", fecha(2))  # al agregar queda seleccionado
@@ -187,7 +199,7 @@ class PruebasRecetas(BaseInterfaz):
         self.raiz.update()  # Tk procesa el evento <<TreeviewSelect>> (como si se hubiera hecho clic)
         detalle = self.app.texto_detalle.get("1.0", "end")
         self.assertIn("Omelette", detalle)
-        self.assertIn("Queso", detalle)
+        self.assertIn("• Queso (lo tienes, pero está vencido)", detalle)
         self.assertIn("está vencido", detalle)
 
     def test_filtro_solo_completas(self):

@@ -54,7 +54,8 @@ food_saver/
   almacenamiento.py        Guardar / cargar JSON (escritura atómica, archivo dañado no rompe la app)
   ejemplos.py              Datos de ejemplo para la demo (fechas relativas a hoy)
   app.py                   Interfaz tkinter: solo dibuja y conecta botones
-tests/                     53 pruebas automáticas (python -m unittest discover -s tests)
+tests/                     54 pruebas automáticas (python -m unittest discover -s tests)
+CASOS_DE_PRUEBA.md         Casos de prueba MANUALES con datos exactos y resultado esperado
 build_exe.bat              Crea el .exe en Windows
 .github/workflows/         Crea el .exe en GitHub Actions
 ```

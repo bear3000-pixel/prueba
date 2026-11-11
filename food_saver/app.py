@@ -410,9 +410,9 @@ class AplicacionFoodSaver:
     def _borrar_todo(self) -> None:
         if not self.ingredientes:
             return
-        if not messagebox.askyesno(
-            "Borrar todo", f"¿Borrar los {len(self.ingredientes)} ingredientes guardados?"
-        ):
+        cantidad = len(self.ingredientes)
+        que = "el ingrediente guardado" if cantidad == 1 else f"los {cantidad} ingredientes guardados"
+        if not messagebox.askyesno("Borrar todo", f"¿Borrar {que}?"):
             return
         self.ingredientes = []
         self._cancelar_edicion()
@@ -561,7 +561,7 @@ class AplicacionFoodSaver:
         if sug.faltantes:
             partes.append(("\nTe faltan\n", "negrita"))
             for nombre in sug.faltantes:
-                nota = "  (lo tienes, pero está vencido)" if nombre in sug.descartados_por_vencidos else ""
+                nota = " (lo tienes, pero está vencido)" if nombre in sug.descartados_por_vencidos else ""
                 partes.append((f"  • {nombre.capitalize()}{nota}\n", "falta"))
 
         partes.append(("\nPreparación\n", "negrita"))
