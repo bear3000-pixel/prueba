@@ -1,0 +1,4638 @@
+{
+ "hoy": "2026-06-15",
+ "unidades": [
+  "unidades",
+  "kg",
+  "g",
+  "L",
+  "ml",
+  "tazas",
+  "paquetes",
+  "latas"
+ ],
+ "autoformato": [
+  {
+   "entrada": "",
+   "escribiendo": false,
+   "salida": ""
+  },
+  {
+   "entrada": "",
+   "escribiendo": true,
+   "salida": ""
+  },
+  {
+   "entrada": "0",
+   "escribiendo": false,
+   "salida": "0"
+  },
+  {
+   "entrada": "0",
+   "escribiendo": true,
+   "salida": "0"
+  },
+  {
+   "entrada": "02",
+   "escribiendo": false,
+   "salida": "02"
+  },
+  {
+   "entrada": "02",
+   "escribiendo": true,
+   "salida": "02/"
+  },
+  {
+   "entrada": "021",
+   "escribiendo": false,
+   "salida": "02/1"
+  },
+  {
+   "entrada": "021",
+   "escribiendo": true,
+   "salida": "02/1"
+  },
+  {
+   "entrada": "0211",
+   "escribiendo": false,
+   "salida": "02/11"
+  },
+  {
+   "entrada": "0211",
+   "escribiendo": true,
+   "salida": "02/11/"
+  },
+  {
+   "entrada": "02112026",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02112026",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "021120261",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "021120261",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "2/11/2026",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "2/11/2026",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/1/",
+   "escribiendo": false,
+   "salida": "02/01/"
+  },
+  {
+   "entrada": "02/1/",
+   "escribiendo": true,
+   "salida": "02/01/"
+  },
+  {
+   "entrada": "1/1/2026",
+   "escribiendo": false,
+   "salida": "01/01/2026"
+  },
+  {
+   "entrada": "1/1/2026",
+   "escribiendo": true,
+   "salida": "01/01/2026"
+  },
+  {
+   "entrada": "02/",
+   "escribiendo": false,
+   "salida": "02/"
+  },
+  {
+   "entrada": "02/",
+   "escribiendo": true,
+   "salida": "02/"
+  },
+  {
+   "entrada": "02/11/",
+   "escribiendo": false,
+   "salida": "02/11/"
+  },
+  {
+   "entrada": "02/11/",
+   "escribiendo": true,
+   "salida": "02/11/"
+  },
+  {
+   "entrada": "02/11/2026",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/11/2026",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/11/26",
+   "escribiendo": false,
+   "salida": "02/11/26"
+  },
+  {
+   "entrada": "02/11/26",
+   "escribiendo": true,
+   "salida": "02/11/26"
+  },
+  {
+   "entrada": "mañana",
+   "escribiendo": false,
+   "salida": ""
+  },
+  {
+   "entrada": "mañana",
+   "escribiendo": true,
+   "salida": ""
+  },
+  {
+   "entrada": "ab0c2d",
+   "escribiendo": false,
+   "salida": "02"
+  },
+  {
+   "entrada": "ab0c2d",
+   "escribiendo": true,
+   "salida": "02/"
+  },
+  {
+   "entrada": "123456789",
+   "escribiendo": false,
+   "salida": "12/34/5678"
+  },
+  {
+   "entrada": "123456789",
+   "escribiendo": true,
+   "salida": "12/34/5678"
+  },
+  {
+   "entrada": "0211202699",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "0211202699",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "2026-11-20",
+   "escribiendo": false,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "2026-11-20",
+   "escribiendo": true,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "2026-1-5",
+   "escribiendo": false,
+   "salida": "05/01/2026"
+  },
+  {
+   "entrada": "2026-1-5",
+   "escribiendo": true,
+   "salida": "05/01/2026"
+  },
+  {
+   "entrada": "20-11-2026",
+   "escribiendo": false,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "20-11-2026",
+   "escribiendo": true,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "20.11.2026",
+   "escribiendo": false,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "20.11.2026",
+   "escribiendo": true,
+   "salida": "20/11/2026"
+  },
+  {
+   "entrada": "02/11/2026 ",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/11/2026 ",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/11/2026/",
+   "escribiendo": false,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "02/11/2026/",
+   "escribiendo": true,
+   "salida": "02/11/2026"
+  },
+  {
+   "entrada": "//02",
+   "escribiendo": false,
+   "salida": "02"
+  },
+  {
+   "entrada": "//02",
+   "escribiendo": true,
+   "salida": "02/"
+  },
+  {
+   "entrada": "02//11",
+   "escribiendo": false,
+   "salida": "02/11"
+  },
+  {
+   "entrada": "02//11",
+   "escribiendo": true,
+   "salida": "02/11/"
+  },
+  {
+   "entrada": "31022026",
+   "escribiendo": false,
+   "salida": "31/02/2026"
+  },
+  {
+   "entrada": "31022026",
+   "escribiendo": true,
+   "salida": "31/02/2026"
+  },
+  {
+   "entrada": "٠٢",
+   "escribiendo": false,
+   "salida": ""
+  },
+  {
+   "entrada": "٠٢",
+   "escribiendo": true,
+   "salida": ""
+  },
+  {
+   "entrada": "5/12/2026",
+   "escribiendo": false,
+   "salida": "05/12/2026"
+  },
+  {
+   "entrada": "5/12/2026",
+   "escribiendo": true,
+   "salida": "05/12/2026"
+  },
+  {
+   "entrada": "5/",
+   "escribiendo": false,
+   "salida": "05/"
+  },
+  {
+   "entrada": "5/",
+   "escribiendo": true,
+   "salida": "05/"
+  },
+  {
+   "entrada": "5//1/",
+   "escribiendo": false,
+   "salida": "05/01/"
+  },
+  {
+   "entrada": "5//1/",
+   "escribiendo": true,
+   "salida": "05/01/"
+  }
+ ],
+ "fechas": [
+  {
+   "entrada": "",
+   "error": "Escribe la fecha de vencimiento (DD/MM/AAAA).",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "   ",
+   "error": "Escribe la fecha de vencimiento (DD/MM/AAAA).",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/12/2026",
+   "ok": "2026-12-25"
+  },
+  {
+   "entrada": "2026-12-25",
+   "ok": "2026-12-25"
+  },
+  {
+   "entrada": "25-12-2026",
+   "ok": "2026-12-25"
+  },
+  {
+   "entrada": " 25/12/2026 ",
+   "ok": "2026-12-25"
+  },
+  {
+   "entrada": "5/1/2027",
+   "ok": "2027-01-05"
+  },
+  {
+   "entrada": "05/01/2027",
+   "ok": "2027-01-05"
+  },
+  {
+   "entrada": "31/02/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "29/02/2028",
+   "ok": "2028-02-29"
+  },
+  {
+   "entrada": "29/02/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "30/04/2026",
+   "ok": "2026-04-30"
+  },
+  {
+   "entrada": "31/04/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "32/01/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "0/1/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "1/0/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/13/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "mañana",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/12/26",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/12/0226",
+   "error": "El año del vencimiento debe estar entre 2000 y 2100.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/12/2926",
+   "error": "El año del vencimiento debe estar entre 2000 y 2100.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "25/12/0000",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "01/01/2000",
+   "ok": "2000-01-01"
+  },
+  {
+   "entrada": "31/12/2100",
+   "ok": "2100-12-31"
+  },
+  {
+   "entrada": "01/01/2101",
+   "error": "El año del vencimiento debe estar entre 2000 y 2100.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "31/12/1999",
+   "error": "El año del vencimiento debe estar entre 2000 y 2100.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "2026/12/25",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "2026-13-01",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "2026-02-30",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "12-31-2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  },
+  {
+   "entrada": "1/1/2026",
+   "ok": "2026-01-01"
+  },
+  {
+   "entrada": "123/1/2026",
+   "error": "Fecha no válida. Usa DD/MM/AAAA (por ejemplo 25/12/2026) y verifica que el día exista.",
+   "campo": "vencimiento"
+  }
+ ],
+ "cantidades": [
+  {
+   "entrada": "",
+   "error": "Escribe la cantidad.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "   ",
+   "error": "Escribe la cantidad.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "0",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "0,0",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "-1",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "-0.5",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "abc",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "1e3",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "nan",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "inf",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "1_000",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "1,2,3",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "2 kg",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "0.0001",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "0,0005",
+   "ok": 0.001
+  },
+  {
+   "entrada": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+   "error": "La cantidad es demasiado grande (máximo 1.000.000).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "5000000",
+   "error": "La cantidad es demasiado grande (máximo 1.000.000).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "1000000",
+   "ok": 1000000.0
+  },
+  {
+   "entrada": "1000001",
+   "error": "La cantidad es demasiado grande (máximo 1.000.000).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "2",
+   "ok": 2.0
+  },
+  {
+   "entrada": " 3 ",
+   "ok": 3.0
+  },
+  {
+   "entrada": "1,5",
+   "ok": 1.5
+  },
+  {
+   "entrada": "1.5",
+   "ok": 1.5
+  },
+  {
+   "entrada": ".25",
+   "ok": 0.25
+  },
+  {
+   "entrada": "5.",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "007",
+   "ok": 7.0
+  },
+  {
+   "entrada": "0.001",
+   "ok": 0.001
+  },
+  {
+   "entrada": "999999.9999",
+   "ok": 1000000.0
+  },
+  {
+   "entrada": "١٢",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "--3",
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": "+3",
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": null,
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "entrada": 4,
+   "ok": 4.0
+  },
+  {
+   "entrada": 1.5,
+   "ok": 1.5
+  }
+ ],
+ "nombres": [
+  {
+   "entrada": "",
+   "error": "Escribe el nombre del ingrediente.",
+   "campo": "nombre"
+  },
+  {
+   "entrada": "   ",
+   "error": "Escribe el nombre del ingrediente.",
+   "campo": "nombre"
+  },
+  {
+   "entrada": "123",
+   "error": "El nombre debe contener letras.",
+   "campo": "nombre"
+  },
+  {
+   "entrada": "!!!",
+   "error": "El nombre debe contener letras.",
+   "campo": "nombre"
+  },
+  {
+   "entrada": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "ok": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+   "entrada": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "error": "El nombre es demasiado largo (máximo 50 caracteres).",
+   "campo": "nombre"
+  },
+  {
+   "entrada": "  Leche    entera ",
+   "ok": "Leche entera"
+  },
+  {
+   "entrada": "Piña",
+   "ok": "Piña"
+  },
+  {
+   "entrada": "ñandú",
+   "ok": "ñandú"
+  },
+  {
+   "entrada": "Ünï cödé",
+   "ok": "Ünï cödé"
+  },
+  {
+   "entrada": null,
+   "error": "Escribe el nombre del ingrediente.",
+   "campo": "nombre"
+  }
+ ],
+ "unidadesValidas": [
+  {
+   "entrada": "kg",
+   "ok": "kg"
+  },
+  {
+   "entrada": "g",
+   "ok": "g"
+  },
+  {
+   "entrada": "L",
+   "ok": "L"
+  },
+  {
+   "entrada": "ml",
+   "ok": "ml"
+  },
+  {
+   "entrada": "unidades",
+   "ok": "unidades"
+  },
+  {
+   "entrada": "tazas",
+   "ok": "tazas"
+  },
+  {
+   "entrada": "KG",
+   "error": "Elige una unidad de la lista.",
+   "campo": "unidad"
+  },
+  {
+   "entrada": "toneladas",
+   "error": "Elige una unidad de la lista.",
+   "campo": "unidad"
+  },
+  {
+   "entrada": "",
+   "error": "Elige una unidad de la lista.",
+   "campo": "unidad"
+  },
+  {
+   "entrada": " kg ",
+   "ok": "kg"
+  },
+  {
+   "entrada": null,
+   "error": "Elige una unidad de la lista.",
+   "campo": "unidad"
+  }
+ ],
+ "conversiones": [
+  {
+   "cantidad": 1500,
+   "de": "g",
+   "a": "kg",
+   "salida": 1.5
+  },
+  {
+   "cantidad": 2,
+   "de": "kg",
+   "a": "g",
+   "salida": 2000.0
+  },
+  {
+   "cantidad": 250,
+   "de": "ml",
+   "a": "L",
+   "salida": 0.25
+  },
+  {
+   "cantidad": 1,
+   "de": "L",
+   "a": "ml",
+   "salida": 1000.0
+  },
+  {
+   "cantidad": 3,
+   "de": "unidades",
+   "a": "unidades",
+   "salida": 3.0
+  },
+  {
+   "cantidad": 3,
+   "de": "unidades",
+   "a": "g",
+   "salida": null
+  },
+  {
+   "cantidad": 1,
+   "de": "kg",
+   "a": "L",
+   "salida": null
+  },
+  {
+   "cantidad": 1,
+   "de": "tazas",
+   "a": "ml",
+   "salida": null
+  },
+  {
+   "cantidad": 0.3,
+   "de": "kg",
+   "a": "g",
+   "salida": 300.0
+  },
+  {
+   "cantidad": 300,
+   "de": "g",
+   "a": "kg",
+   "salida": 0.3
+  },
+  {
+   "cantidad": 7,
+   "de": "kg",
+   "a": "kg",
+   "salida": 7.0
+  }
+ ],
+ "formatoCantidad": [
+  {
+   "entrada": 0,
+   "salida": "0"
+  },
+  {
+   "entrada": 1,
+   "salida": "1"
+  },
+  {
+   "entrada": 2,
+   "salida": "2"
+  },
+  {
+   "entrada": 1.5,
+   "salida": "1,5"
+  },
+  {
+   "entrada": 0.25,
+   "salida": "0,25"
+  },
+  {
+   "entrada": 0.125,
+   "salida": "0,125"
+  },
+  {
+   "entrada": 1000000,
+   "salida": "1000000"
+  },
+  {
+   "entrada": 0.001,
+   "salida": "0,001"
+  },
+  {
+   "entrada": 12.34,
+   "salida": "12,34"
+  },
+  {
+   "entrada": 99.5,
+   "salida": "99,5"
+  },
+  {
+   "entrada": 3.0,
+   "salida": "3"
+  }
+ ],
+ "textoCantidad": [
+  {
+   "cantidad": 1,
+   "unidad": "paquetes",
+   "salida": "1 paquete"
+  },
+  {
+   "cantidad": 1,
+   "unidad": "unidades",
+   "salida": "1 unidad"
+  },
+  {
+   "cantidad": 1,
+   "unidad": "tazas",
+   "salida": "1 taza"
+  },
+  {
+   "cantidad": 1,
+   "unidad": "latas",
+   "salida": "1 lata"
+  },
+  {
+   "cantidad": 1,
+   "unidad": "kg",
+   "salida": "1 kg"
+  },
+  {
+   "cantidad": 1,
+   "unidad": "L",
+   "salida": "1 L"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "paquetes",
+   "salida": "2 paquetes"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "unidades",
+   "salida": "2 unidades"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "tazas",
+   "salida": "2 tazas"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "latas",
+   "salida": "2 latas"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "kg",
+   "salida": "2 kg"
+  },
+  {
+   "cantidad": 2,
+   "unidad": "L",
+   "salida": "2 L"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "paquetes",
+   "salida": "1,5 paquetes"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "unidades",
+   "salida": "1,5 unidades"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "tazas",
+   "salida": "1,5 tazas"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "latas",
+   "salida": "1,5 latas"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "kg",
+   "salida": "1,5 kg"
+  },
+  {
+   "cantidad": 1.5,
+   "unidad": "L",
+   "salida": "1,5 L"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "paquetes",
+   "salida": "0,5 paquetes"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "unidades",
+   "salida": "0,5 unidades"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "tazas",
+   "salida": "0,5 tazas"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "latas",
+   "salida": "0,5 latas"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "kg",
+   "salida": "0,5 kg"
+  },
+  {
+   "cantidad": 0.5,
+   "unidad": "L",
+   "salida": "0,5 L"
+  }
+ ],
+ "describirVencimiento": [
+  {
+   "dias": -5,
+   "salida": "vencido hace 5 días"
+  },
+  {
+   "dias": -4,
+   "salida": "vencido hace 4 días"
+  },
+  {
+   "dias": -3,
+   "salida": "vencido hace 3 días"
+  },
+  {
+   "dias": -2,
+   "salida": "vencido hace 2 días"
+  },
+  {
+   "dias": -1,
+   "salida": "vencido hace 1 día"
+  },
+  {
+   "dias": 0,
+   "salida": "vence hoy"
+  },
+  {
+   "dias": 1,
+   "salida": "vence mañana"
+  },
+  {
+   "dias": 2,
+   "salida": "vence en 2 días"
+  },
+  {
+   "dias": 3,
+   "salida": "vence en 3 días"
+  },
+  {
+   "dias": 4,
+   "salida": "vence en 4 días"
+  },
+  {
+   "dias": 5,
+   "salida": "vence en 5 días"
+  },
+  {
+   "dias": 6,
+   "salida": "vence en 6 días"
+  },
+  {
+   "dias": 7,
+   "salida": "vence en 7 días"
+  },
+  {
+   "dias": 8,
+   "salida": "vence en 8 días"
+  },
+  {
+   "dias": 9,
+   "salida": "vence en 9 días"
+  },
+  {
+   "dias": 10,
+   "salida": "vence en 10 días"
+  }
+ ],
+ "formatoFecha": [
+  {
+   "entrada": "2026-06-15",
+   "salida": "15/06/2026"
+  },
+  {
+   "entrada": "2000-01-05",
+   "salida": "05/01/2000"
+  },
+  {
+   "entrada": "2100-12-31",
+   "salida": "31/12/2100"
+  }
+ ],
+ "normalizar": [
+  {
+   "entrada": "  Limón  Verde ",
+   "salida": "limon verde"
+  },
+  {
+   "entrada": "PIÑA",
+   "salida": "pina"
+  },
+  {
+   "entrada": "Plátano",
+   "salida": "platano"
+  },
+  {
+   "entrada": "ÁÉÍÓÚ",
+   "salida": "aeiou"
+  },
+  {
+   "entrada": "",
+   "salida": ""
+  },
+  {
+   "entrada": "  ",
+   "salida": ""
+  },
+  {
+   "entrada": "Ñandú",
+   "salida": "nandu"
+  },
+  {
+   "entrada": "Çedilla",
+   "salida": "cedilla"
+  }
+ ],
+ "coincidencias": [
+  {
+   "requerido": "tomate",
+   "disponible": "Tomates",
+   "salida": true
+  },
+  {
+   "requerido": "limon",
+   "disponible": "Limón",
+   "salida": true
+  },
+  {
+   "requerido": "limon",
+   "disponible": "limones",
+   "salida": true
+  },
+  {
+   "requerido": "frijol",
+   "disponible": "Frijoles",
+   "salida": true
+  },
+  {
+   "requerido": "pan",
+   "disponible": "Panes",
+   "salida": true
+  },
+  {
+   "requerido": "huevo",
+   "disponible": "HUEVOS",
+   "salida": true
+  },
+  {
+   "requerido": "leche",
+   "disponible": "Leche entera",
+   "salida": true
+  },
+  {
+   "requerido": "tomate",
+   "disponible": "Tomates cherry",
+   "salida": true
+  },
+  {
+   "requerido": "platano",
+   "disponible": "Plátano",
+   "salida": true
+  },
+  {
+   "requerido": "jamon",
+   "disponible": "Jamón",
+   "salida": true
+  },
+  {
+   "requerido": "pan",
+   "disponible": "papa",
+   "salida": false
+  },
+  {
+   "requerido": "arroz",
+   "disponible": "maiz",
+   "salida": false
+  },
+  {
+   "requerido": "leche",
+   "disponible": "lechuga",
+   "salida": false
+  },
+  {
+   "requerido": "ajo",
+   "disponible": "ajonjoli",
+   "salida": false
+  },
+  {
+   "requerido": "pollo",
+   "disponible": "polvo",
+   "salida": false
+  },
+  {
+   "requerido": "tomate",
+   "disponible": "pasta",
+   "salida": false
+  },
+  {
+   "requerido": "pasta",
+   "disponible": "pastas",
+   "salida": true
+  },
+  {
+   "requerido": "pasta de tomate",
+   "disponible": "tomate",
+   "salida": false
+  },
+  {
+   "requerido": "gas",
+   "disponible": "gases",
+   "salida": true
+  },
+  {
+   "requerido": "arroz integral",
+   "disponible": "arroz",
+   "salida": false
+  },
+  {
+   "requerido": "arroz",
+   "disponible": "arroz integral",
+   "salida": true
+  }
+ ],
+ "pasos": [
+  {
+   "entrada": "",
+   "error": "Escribe al menos un paso de preparación.",
+   "campo": "pasos"
+  },
+  {
+   "entrada": "   \n  \n",
+   "error": "Escribe al menos un paso de preparación.",
+   "campo": "pasos"
+  },
+  {
+   "entrada": "123\n456",
+   "error": "El paso 1 debe contener texto.",
+   "campo": "pasos"
+  },
+  {
+   "entrada": "x\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\nx\n",
+   "error": "Hay demasiados pasos (máximo 20).",
+   "campo": "pasos"
+  },
+  {
+   "entrada": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "error": "El paso 1 es demasiado largo (máximo 300 caracteres).",
+   "campo": "pasos"
+  },
+  {
+   "entrada": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "ok": [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   ]
+  },
+  {
+   "entrada": "1. Mezclar\n2) Amasar\n- Hornear\n• Servir\n* Fin",
+   "ok": [
+    "Mezclar",
+    "Amasar",
+    "Hornear",
+    "Servir",
+    "Fin"
+   ]
+  },
+  {
+   "entrada": "2 huevos batidos\n1.5 tazas de leche\nHornear 2-3 minutos",
+   "ok": [
+    "2 huevos batidos",
+    "1.5 tazas de leche",
+    "Hornear 2-3 minutos"
+   ]
+  },
+  {
+   "entrada": "Paso uno\r\nPaso dos\rPaso tres",
+   "ok": [
+    "Paso uno",
+    "Paso dos",
+    "Paso tres"
+   ]
+  },
+  {
+   "entrada": "1.Mezclar",
+   "ok": [
+    "1.Mezclar"
+   ]
+  },
+  {
+   "entrada": "-Mezclar",
+   "ok": [
+    "-Mezclar"
+   ]
+  },
+  {
+   "entrada": [
+    "Uno",
+    "Dos"
+   ],
+   "ok": [
+    "Uno",
+    "Dos"
+   ]
+  },
+  {
+   "entrada": [],
+   "error": "Escribe al menos un paso de preparación.",
+   "campo": "pasos"
+  },
+  {
+   "entrada": [
+    "123"
+   ],
+   "error": "El paso 1 debe contener texto.",
+   "campo": "pasos"
+  }
+ ],
+ "recetasNuevas": [
+  {
+   "caso": {
+    "nombre": "Tortilla de papa",
+    "filas": [
+     [
+      "Papa",
+      "3",
+      "unidades"
+     ],
+     [
+      "Huevo",
+      "4",
+      "unidades"
+     ],
+     [
+      "Cebolla",
+      "1,5",
+      "unidades"
+     ]
+    ],
+    "pasos": "1. Pela\n2) Fríe\n- Sirve"
+   },
+   "ok": {
+    "nombre": "Tortilla de papa",
+    "ingredientes": [
+     "Papa",
+     "Huevo",
+     "Cebolla"
+    ],
+    "instrucciones": [
+     "Pela",
+     "Fríe",
+     "Sirve"
+    ],
+    "cantidades": [
+     [
+      3.0,
+      "unidades"
+     ],
+     [
+      4.0,
+      "unidades"
+     ],
+     [
+      1.5,
+      "unidades"
+     ]
+    ],
+    "propia": true,
+    "id": "r0"
+   }
+  },
+  {
+   "caso": {
+    "nombre": "  Mi   guiso ",
+    "filas": [
+     [
+      "Papa",
+      "3",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "ok": {
+    "nombre": "Mi guiso",
+    "ingredientes": [
+     "Papa"
+    ],
+    "instrucciones": [
+     "Cocinar"
+    ],
+    "cantidades": [
+     [
+      3.0,
+      "unidades"
+     ]
+    ],
+    "propia": true,
+    "id": "r0"
+   }
+  },
+  {
+   "caso": {
+    "nombre": "",
+    "filas": [
+     [
+      "Papa",
+      "3",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Escribe el nombre de la receta.",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "123",
+    "filas": [
+     [
+      "Papa",
+      "3",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "El nombre de la receta debe contener letras.",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "filas": [
+     [
+      "Papa",
+      "3",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "El nombre de la receta es demasiado largo (máximo 60 caracteres).",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "OMELETTE DE QUESO Y TOMATE",
+    "filas": [
+     [
+      "Huevo",
+      "2",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Ya existe una receta llamada «OMELETTE DE QUESO Y TOMATE». Elige otro nombre.",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [],
+    "pasos": "Cocinar"
+   },
+   "error": "Agrega al menos un ingrediente a la receta.",
+   "campo": "ingredientes"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Falta la cantidad de «Papa».",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "0",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "-2",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "La cantidad debe ser mayor que cero.",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "abc",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "1e3",
+      "g"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "La cantidad debe ser un número (por ejemplo 2 o 1,5).",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "5000000",
+      "g"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "La cantidad es demasiado grande (máximo 1.000.000).",
+   "campo": "cantidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "1",
+      "toneladas"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Elige una unidad de la lista.",
+   "campo": "unidad"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "",
+      "1",
+      "g"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Escribe el nombre del ingrediente.",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "123",
+      "1",
+      "g"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "El nombre debe contener letras.",
+   "campo": "nombre"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Tomate",
+      "1",
+      "unidades"
+     ],
+     [
+      "TOMATES",
+      "2",
+      "unidades"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "«TOMATES» está repetido en la receta.",
+   "campo": "ingredientes"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Papa",
+      "1",
+      "g"
+     ]
+    ],
+    "pasos": ""
+   },
+   "error": "Escribe al menos un paso de preparación.",
+   "campo": "pasos"
+  },
+  {
+   "caso": {
+    "nombre": "Otra",
+    "filas": [
+     [
+      "Ingredienteax",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientebx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientecx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientedx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienteex",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientefx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientegx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientehx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienteix",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientejx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientekx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientelx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientemx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientenx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienteox",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientepx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienteqx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienterx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientesx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredientetx",
+      "1",
+      "g"
+     ],
+     [
+      "Ingredienteux",
+      "1",
+      "g"
+     ]
+    ],
+    "pasos": "Cocinar"
+   },
+   "error": "Hay demasiados ingredientes (máximo 20).",
+   "campo": "ingredientes"
+  }
+ ],
+ "recetasPropiasEspec": [
+  {
+   "nombre": "Pan casero",
+   "filas": [
+    [
+     "Harina",
+     "500",
+     "g"
+    ],
+    [
+     "Agua",
+     "300",
+     "ml"
+    ]
+   ],
+   "pasos": "Mezclar\nAmasar\nHornear",
+   "id": "r1"
+  },
+  {
+   "nombre": "Salsa",
+   "filas": [
+    [
+     "Tomate",
+     "3",
+     "unidades"
+    ]
+   ],
+   "pasos": "Cocinar",
+   "id": "r2"
+  },
+  {
+   "nombre": "Pastel",
+   "filas": [
+    [
+     "Harina",
+     "0,8",
+     "kg"
+    ]
+   ],
+   "pasos": "Hornear",
+   "id": "r4"
+  },
+  {
+   "nombre": "Galletas",
+   "filas": [
+    [
+     "Harina",
+     "200",
+     "g"
+    ],
+    [
+     "Azúcar",
+     "1,5",
+     "kg"
+    ],
+    [
+     "Mantequilla",
+     "100",
+     "g"
+    ]
+   ],
+   "pasos": "Hornear",
+   "id": "r3"
+  }
+ ],
+ "recetasPropias": [
+  {
+   "nombre": "Pan casero",
+   "ingredientes": [
+    "Harina",
+    "Agua"
+   ],
+   "instrucciones": [
+    "Mezclar",
+    "Amasar",
+    "Hornear"
+   ],
+   "cantidades": [
+    [
+     500.0,
+     "g"
+    ],
+    [
+     300.0,
+     "ml"
+    ]
+   ],
+   "propia": true,
+   "id": "r1"
+  },
+  {
+   "nombre": "Salsa",
+   "ingredientes": [
+    "Tomate"
+   ],
+   "instrucciones": [
+    "Cocinar"
+   ],
+   "cantidades": [
+    [
+     3.0,
+     "unidades"
+    ]
+   ],
+   "propia": true,
+   "id": "r2"
+  },
+  {
+   "nombre": "Pastel",
+   "ingredientes": [
+    "Harina"
+   ],
+   "instrucciones": [
+    "Hornear"
+   ],
+   "cantidades": [
+    [
+     0.8,
+     "kg"
+    ]
+   ],
+   "propia": true,
+   "id": "r4"
+  },
+  {
+   "nombre": "Galletas",
+   "ingredientes": [
+    "Harina",
+    "Azúcar",
+    "Mantequilla"
+   ],
+   "instrucciones": [
+    "Hornear"
+   ],
+   "cantidades": [
+    [
+     200.0,
+     "g"
+    ],
+    [
+     1.5,
+     "kg"
+    ],
+    [
+     100.0,
+     "g"
+    ]
+   ],
+   "propia": true,
+   "id": "r3"
+  }
+ ],
+ "datosGuardadosDeRecetas": [
+  {
+   "id": "r1",
+   "nombre": "Pan casero",
+   "ingredientes": [
+    {
+     "nombre": "Harina",
+     "cantidad": 500.0,
+     "unidad": "g"
+    },
+    {
+     "nombre": "Agua",
+     "cantidad": 300.0,
+     "unidad": "ml"
+    }
+   ],
+   "instrucciones": [
+    "Mezclar",
+    "Amasar",
+    "Hornear"
+   ]
+  },
+  {
+   "id": "r2",
+   "nombre": "Salsa",
+   "ingredientes": [
+    {
+     "nombre": "Tomate",
+     "cantidad": 3.0,
+     "unidad": "unidades"
+    }
+   ],
+   "instrucciones": [
+    "Cocinar"
+   ]
+  },
+  {
+   "id": "r4",
+   "nombre": "Pastel",
+   "ingredientes": [
+    {
+     "nombre": "Harina",
+     "cantidad": 0.8,
+     "unidad": "kg"
+    }
+   ],
+   "instrucciones": [
+    "Hornear"
+   ]
+  },
+  {
+   "id": "r3",
+   "nombre": "Galletas",
+   "ingredientes": [
+    {
+     "nombre": "Harina",
+     "cantidad": 200.0,
+     "unidad": "g"
+    },
+    {
+     "nombre": "Azúcar",
+     "cantidad": 1.5,
+     "unidad": "kg"
+    },
+    {
+     "nombre": "Mantequilla",
+     "cantidad": 100.0,
+     "unidad": "g"
+    }
+   ],
+   "instrucciones": [
+    "Hornear"
+   ]
+  }
+ ],
+ "ejemplos": [
+  [
+   "Pan de molde",
+   1.0,
+   "paquetes",
+   "2026-06-17"
+  ],
+  [
+   "Leche",
+   1.0,
+   "L",
+   "2026-06-17"
+  ],
+  [
+   "Espinaca",
+   1.0,
+   "paquetes",
+   "2026-06-16"
+  ],
+  [
+   "Tomates",
+   4.0,
+   "unidades",
+   "2026-06-18"
+  ],
+  [
+   "Huevos",
+   6.0,
+   "unidades",
+   "2026-06-20"
+  ],
+  [
+   "Zanahorias",
+   4.0,
+   "unidades",
+   "2026-06-21"
+  ],
+  [
+   "Queso",
+   200.0,
+   "g",
+   "2026-06-25"
+  ],
+  [
+   "Cebolla",
+   3.0,
+   "unidades",
+   "2026-06-27"
+  ],
+  [
+   "Papas",
+   5.0,
+   "unidades",
+   "2026-06-30"
+  ],
+  [
+   "Arroz",
+   1.0,
+   "kg",
+   "2027-01-01"
+  ],
+  [
+   "Pollo",
+   500.0,
+   "g",
+   "2026-06-14"
+  ],
+  [
+   "Yogur",
+   2.0,
+   "unidades",
+   "2026-06-12"
+  ]
+ ],
+ "orden": {
+  "despensa": [
+   [
+    "Arroz",
+    1,
+    "kg",
+    "2027-01-01",
+    "Arroz-200"
+   ],
+   [
+    "zanahoria",
+    1,
+    "unidades",
+    "2026-06-17",
+    "zanahoria-2"
+   ],
+   [
+    "Arroz",
+    1,
+    "kg",
+    "2026-06-17",
+    "Arroz-2"
+   ],
+   [
+    "Pollo",
+    500,
+    "g",
+    "2026-06-14",
+    "Pollo--1"
+   ],
+   [
+    "Leche",
+    1,
+    "L",
+    "2026-06-15",
+    "Leche-0"
+   ],
+   [
+    "ayer",
+    1,
+    "unidades",
+    "2026-06-14",
+    "ayer--1"
+   ],
+   [
+    "hace_mucho",
+    1,
+    "unidades",
+    "2026-05-16",
+    "hace_mucho--30"
+   ],
+   [
+    "Ñoquis",
+    1,
+    "paquetes",
+    "2026-06-20",
+    "Ñoquis-5"
+   ],
+   [
+    "noquis",
+    1,
+    "paquetes",
+    "2026-06-20",
+    "noquis-5"
+   ],
+   [
+    "Óleo",
+    1,
+    "latas",
+    "2026-06-20",
+    "Óleo-5"
+   ]
+  ],
+  "ordenados": [
+   "hace_mucho--30",
+   "ayer--1",
+   "Pollo--1",
+   "Leche-0",
+   "Arroz-2",
+   "zanahoria-2",
+   "Ñoquis-5",
+   "noquis-5",
+   "Óleo-5",
+   "Arroz-200"
+  ],
+  "vigentes": [
+   "Leche-0",
+   "Arroz-2",
+   "zanahoria-2",
+   "Ñoquis-5",
+   "noquis-5",
+   "Óleo-5",
+   "Arroz-200"
+  ],
+  "vencidos": [
+   "hace_mucho--30",
+   "ayer--1",
+   "Pollo--1"
+  ]
+ },
+ "sugerencias": [
+  {
+   "caso": "ejemplo, predefinidas",
+   "despensa": [
+    [
+     "Pan de molde",
+     1.0,
+     "paquetes",
+     "2026-06-17"
+    ],
+    [
+     "Leche",
+     1.0,
+     "L",
+     "2026-06-17"
+    ],
+    [
+     "Espinaca",
+     1.0,
+     "paquetes",
+     "2026-06-16"
+    ],
+    [
+     "Tomates",
+     4.0,
+     "unidades",
+     "2026-06-18"
+    ],
+    [
+     "Huevos",
+     6.0,
+     "unidades",
+     "2026-06-20"
+    ],
+    [
+     "Zanahorias",
+     4.0,
+     "unidades",
+     "2026-06-21"
+    ],
+    [
+     "Queso",
+     200.0,
+     "g",
+     "2026-06-25"
+    ],
+    [
+     "Cebolla",
+     3.0,
+     "unidades",
+     "2026-06-27"
+    ],
+    [
+     "Papas",
+     5.0,
+     "unidades",
+     "2026-06-30"
+    ],
+    [
+     "Arroz",
+     1.0,
+     "kg",
+     "2027-01-01"
+    ],
+    [
+     "Pollo",
+     500.0,
+     "g",
+     "2026-06-14"
+    ],
+    [
+     "Yogur",
+     2.0,
+     "unidades",
+     "2026-06-12"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Tostadas francesas",
+     "usados": [
+      [
+       "pan",
+       "Pan de molde",
+       2,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "leche",
+       "Leche",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 13,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Huevos revueltos con espinaca",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "espinaca",
+       "Espinaca",
+       1,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 1,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ],
+      [
+       "tomate",
+       "Tomates",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 3,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Guiso de lentejas",
+     "usados": [
+      [
+       "zanahoria",
+       "Zanahorias",
+       6,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ],
+      [
+       "tomate",
+       "Tomates",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [
+      "lenteja",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 5
+    },
+    {
+     "receta": "Arroz frito con huevo",
+     "usados": [
+      [
+       "arroz",
+       "Arroz",
+       200,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ],
+      [
+       "zanahoria",
+       "Zanahorias",
+       6,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 8,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 4
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "leche",
+       "Leche",
+       2,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "harina"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 8,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Puré de papa",
+     "usados": [
+      [
+       "papa",
+       "Papas",
+       15,
+       null
+      ],
+      [
+       "leche",
+       "Leche",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Sándwich de jamón y queso",
+     "usados": [
+      [
+       "pan",
+       "Pan de molde",
+       2,
+       null
+      ],
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ]
+     ],
+     "faltantes": [
+      "jamon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Ensalada de atún",
+     "usados": [
+      [
+       "tomate",
+       "Tomates",
+       3,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [
+      "atun",
+      "limon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Pasta con salsa de tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomates",
+       3,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pasta",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Arroz con pollo y verduras",
+     "usados": [
+      [
+       "arroz",
+       "Arroz",
+       200,
+       null
+      ],
+      [
+       "zanahoria",
+       "Zanahorias",
+       6,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pollo"
+     ],
+     "descartados": [
+      "pollo"
+     ],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 6,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Batido de plátano y leche",
+     "usados": [
+      [
+       "leche",
+       "Leche",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "platano"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Sopa de verduras",
+     "usados": [
+      [
+       "zanahoria",
+       "Zanahorias",
+       6,
+       null
+      ],
+      [
+       "papa",
+       "Papas",
+       15,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 6,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Frijoles con arroz",
+     "usados": [
+      [
+       "arroz",
+       "Arroz",
+       200,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [
+      "frijol",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 2,
+     "diasMasUrgente": 12,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Quesadillas",
+     "usados": [
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ]
+     ],
+     "faltantes": [
+      "tortilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 10,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Pollo al limón con papas",
+     "usados": [
+      [
+       "papa",
+       "Papas",
+       15,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pollo",
+      "limon",
+      "ajo"
+     ],
+     "descartados": [
+      "pollo"
+     ],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 15,
+     "completa": false,
+     "total": 4
+    }
+   ]
+  },
+  {
+   "caso": "ejemplo, predefinidas, solo completas",
+   "despensa": [
+    [
+     "Pan de molde",
+     1.0,
+     "paquetes",
+     "2026-06-17"
+    ],
+    [
+     "Leche",
+     1.0,
+     "L",
+     "2026-06-17"
+    ],
+    [
+     "Espinaca",
+     1.0,
+     "paquetes",
+     "2026-06-16"
+    ],
+    [
+     "Tomates",
+     4.0,
+     "unidades",
+     "2026-06-18"
+    ],
+    [
+     "Huevos",
+     6.0,
+     "unidades",
+     "2026-06-20"
+    ],
+    [
+     "Zanahorias",
+     4.0,
+     "unidades",
+     "2026-06-21"
+    ],
+    [
+     "Queso",
+     200.0,
+     "g",
+     "2026-06-25"
+    ],
+    [
+     "Cebolla",
+     3.0,
+     "unidades",
+     "2026-06-27"
+    ],
+    [
+     "Papas",
+     5.0,
+     "unidades",
+     "2026-06-30"
+    ],
+    [
+     "Arroz",
+     1.0,
+     "kg",
+     "2027-01-01"
+    ],
+    [
+     "Pollo",
+     500.0,
+     "g",
+     "2026-06-14"
+    ],
+    [
+     "Yogur",
+     2.0,
+     "unidades",
+     "2026-06-12"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": true,
+   "resultado": [
+    {
+     "receta": "Tostadas francesas",
+     "usados": [
+      [
+       "pan",
+       "Pan de molde",
+       2,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "leche",
+       "Leche",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 13,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Huevos revueltos con espinaca",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "espinaca",
+       "Espinaca",
+       1,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 1,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ],
+      [
+       "tomate",
+       "Tomates",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 3,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Arroz frito con huevo",
+     "usados": [
+      [
+       "arroz",
+       "Arroz",
+       200,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "cebolla",
+       "Cebolla",
+       12,
+       null
+      ],
+      [
+       "zanahoria",
+       "Zanahorias",
+       6,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 8,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 4
+    }
+   ]
+  },
+  {
+   "caso": "demo del reto",
+   "despensa": [
+    [
+     "Huevos",
+     6,
+     "unidades",
+     "2026-06-20"
+    ],
+    [
+     "Queso",
+     200,
+     "g",
+     "2026-06-25"
+    ],
+    [
+     "Tomates",
+     4,
+     "unidades",
+     "2026-06-17"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ],
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ],
+      [
+       "tomate",
+       "Tomates",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 9,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Ensalada de atún",
+     "usados": [
+      [
+       "tomate",
+       "Tomates",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "atun",
+      "cebolla",
+      "limon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Pasta con salsa de tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomates",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pasta",
+      "ajo",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Guiso de lentejas",
+     "usados": [
+      [
+       "tomate",
+       "Tomates",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "lenteja",
+      "zanahoria",
+      "cebolla",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 5
+    },
+    {
+     "receta": "Huevos revueltos con espinaca",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "espinaca",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "harina",
+      "leche"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Tostadas francesas",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pan",
+      "leche"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Arroz frito con huevo",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "arroz",
+      "cebolla",
+      "zanahoria"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Quesadillas",
+     "usados": [
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ]
+     ],
+     "faltantes": [
+      "tortilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 10,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Sándwich de jamón y queso",
+     "usados": [
+      [
+       "queso",
+       "Queso",
+       10,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pan",
+      "jamon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 10,
+     "completa": false,
+     "total": 3
+    }
+   ]
+  },
+  {
+   "caso": "plurales, acentos y mayúsculas",
+   "despensa": [
+    [
+     "LIMONES",
+     3,
+     "unidades",
+     "2026-06-24"
+    ],
+    [
+     "Plátanos",
+     2,
+     "unidades",
+     "2026-06-18"
+    ],
+    [
+     "tomate",
+     1,
+     "unidades",
+     "2026-06-18"
+    ],
+    [
+     "Leche entera",
+     1,
+     "L",
+     "2026-06-17"
+    ],
+    [
+     "Jamón",
+     200,
+     "g",
+     "2026-06-24"
+    ],
+    [
+     "PAN",
+     1,
+     "paquetes",
+     "2026-06-18"
+    ],
+    [
+     "queso",
+     100,
+     "g",
+     "2026-06-24"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Batido de plátano y leche",
+     "usados": [
+      [
+       "platano",
+       "Plátanos",
+       3,
+       null
+      ],
+      [
+       "leche",
+       "Leche entera",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 10,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Tostadas francesas",
+     "usados": [
+      [
+       "pan",
+       "PAN",
+       3,
+       null
+      ],
+      [
+       "leche",
+       "Leche entera",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 10,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Sándwich de jamón y queso",
+     "usados": [
+      [
+       "pan",
+       "PAN",
+       3,
+       null
+      ],
+      [
+       "jamon",
+       "Jamón",
+       9,
+       null
+      ],
+      [
+       "queso",
+       "queso",
+       9,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 7,
+     "diasMasUrgente": 3,
+     "completa": true,
+     "total": 3
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "queso",
+       "queso",
+       9,
+       null
+      ],
+      [
+       "tomate",
+       "tomate",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Ensalada de atún",
+     "usados": [
+      [
+       "tomate",
+       "tomate",
+       3,
+       null
+      ],
+      [
+       "limon",
+       "LIMONES",
+       9,
+       null
+      ]
+     ],
+     "faltantes": [
+      "atun",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Ensalada de frutas",
+     "usados": [
+      [
+       "platano",
+       "Plátanos",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [
+      "manzana",
+      "naranja"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "leche",
+       "Leche entera",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "harina",
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Puré de papa",
+     "usados": [
+      [
+       "leche",
+       "Leche entera",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "papa",
+      "mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Pasta con salsa de tomate",
+     "usados": [
+      [
+       "tomate",
+       "tomate",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pasta",
+      "ajo",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Guiso de lentejas",
+     "usados": [
+      [
+       "tomate",
+       "tomate",
+       3,
+       null
+      ]
+     ],
+     "faltantes": [
+      "lenteja",
+      "zanahoria",
+      "cebolla",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 3,
+     "completa": false,
+     "total": 5
+    },
+    {
+     "receta": "Quesadillas",
+     "usados": [
+      [
+       "queso",
+       "queso",
+       9,
+       null
+      ]
+     ],
+     "faltantes": [
+      "tortilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 9,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Pollo al limón con papas",
+     "usados": [
+      [
+       "limon",
+       "LIMONES",
+       9,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pollo",
+      "papa",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 9,
+     "completa": false,
+     "total": 4
+    }
+   ]
+  },
+  {
+   "caso": "varios lotes",
+   "despensa": [
+    [
+     "Leche",
+     1,
+     "L",
+     "2026-06-30"
+    ],
+    [
+     "Leche",
+     2,
+     "L",
+     "2026-06-16"
+    ],
+    [
+     "Plátano",
+     2,
+     "unidades",
+     "2026-06-24"
+    ],
+    [
+     "Huevos",
+     6,
+     "unidades",
+     "2026-06-15"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "leche",
+       "Leche",
+       1,
+       null
+      ],
+      [
+       "huevo",
+       "Huevos",
+       0,
+       null
+      ]
+     ],
+     "faltantes": [
+      "harina"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 10,
+     "diasMasUrgente": 0,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Tostadas francesas",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       0,
+       null
+      ],
+      [
+       "leche",
+       "Leche",
+       1,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pan"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 10,
+     "diasMasUrgente": 0,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Batido de plátano y leche",
+     "usados": [
+      [
+       "platano",
+       "Plátano",
+       9,
+       null
+      ],
+      [
+       "leche",
+       "Leche",
+       1,
+       null
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 1,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Huevos revueltos con espinaca",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       0,
+       null
+      ]
+     ],
+     "faltantes": [
+      "espinaca",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 0,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       0,
+       null
+      ]
+     ],
+     "faltantes": [
+      "queso",
+      "tomate"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 0,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Puré de papa",
+     "usados": [
+      [
+       "leche",
+       "Leche",
+       1,
+       null
+      ]
+     ],
+     "faltantes": [
+      "papa",
+      "mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 1,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Arroz frito con huevo",
+     "usados": [
+      [
+       "huevo",
+       "Huevos",
+       0,
+       null
+      ]
+     ],
+     "faltantes": [
+      "arroz",
+      "cebolla",
+      "zanahoria"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 0,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Ensalada de frutas",
+     "usados": [
+      [
+       "platano",
+       "Plátano",
+       9,
+       null
+      ]
+     ],
+     "faltantes": [
+      "manzana",
+      "naranja"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 9,
+     "completa": false,
+     "total": 3
+    }
+   ]
+  },
+  {
+   "caso": "solo vencidos",
+   "despensa": [
+    [
+     "Plátano",
+     2,
+     "unidades",
+     "2026-06-14"
+    ],
+    [
+     "Leche",
+     1,
+     "L",
+     "2026-06-05"
+    ],
+    [
+     "Pollo",
+     500,
+     "g",
+     "2026-06-12"
+    ]
+   ],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": []
+  },
+  {
+   "caso": "despensa vacía",
+   "despensa": [],
+   "recetas": "predefinidas",
+   "soloCompletas": false,
+   "resultado": []
+  },
+  {
+   "caso": "cantidades, todas las recetas",
+   "despensa": [
+    [
+     "Harina",
+     300,
+     "g",
+     "2026-06-19"
+    ],
+    [
+     "Harina",
+     0.3,
+     "kg",
+     "2026-06-24"
+    ],
+    [
+     "Agua",
+     1,
+     "L",
+     "2026-06-19"
+    ],
+    [
+     "Tomate",
+     500,
+     "g",
+     "2026-06-17"
+    ],
+    [
+     "Azúcar",
+     5,
+     "kg",
+     "2026-06-13"
+    ],
+    [
+     "Mantequilla",
+     100,
+     "g",
+     "2026-07-05"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Pan casero",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       4,
+       [
+        500.0,
+        "g"
+       ]
+      ],
+      [
+       "Agua",
+       "Agua",
+       4,
+       [
+        300.0,
+        "ml"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 4,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Salsa",
+     "usados": [
+      [
+       "Tomate",
+       "Tomate",
+       2,
+       [
+        3.0,
+        "unidades"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 1
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "huevo",
+      "queso"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Ensalada de atún",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "atun",
+      "cebolla",
+      "limon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Pasta con salsa de tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pasta",
+      "ajo",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Guiso de lentejas",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       2,
+       null
+      ]
+     ],
+     "faltantes": [
+      "lenteja",
+      "zanahoria",
+      "cebolla",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": false,
+     "total": 5
+    },
+    {
+     "receta": "Galletas",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       4,
+       [
+        200.0,
+        "g"
+       ]
+      ],
+      [
+       "Mantequilla",
+       "Mantequilla",
+       20,
+       [
+        100.0,
+        "g"
+       ]
+      ]
+     ],
+     "faltantes": [
+      "Azúcar"
+     ],
+     "descartados": [
+      "Azúcar"
+     ],
+     "insuficientes": [],
+     "puntaje": 4,
+     "diasMasUrgente": 4,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Pastel",
+     "usados": [],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [
+      [
+       "Harina",
+       "Harina",
+       4,
+       [
+        0.8,
+        "kg"
+       ],
+       [
+        0.6,
+        "kg"
+       ]
+      ]
+     ],
+     "puntaje": 3,
+     "diasMasUrgente": 4,
+     "completa": false,
+     "total": 1
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "harina",
+       "Harina",
+       4,
+       null
+      ]
+     ],
+     "faltantes": [
+      "leche",
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 4,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Puré de papa",
+     "usados": [
+      [
+       "mantequilla",
+       "Mantequilla",
+       20,
+       null
+      ]
+     ],
+     "faltantes": [
+      "papa",
+      "leche"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 1,
+     "diasMasUrgente": 20,
+     "completa": false,
+     "total": 3
+    }
+   ]
+  },
+  {
+   "caso": "cantidades, solo completas",
+   "despensa": [
+    [
+     "Harina",
+     300,
+     "g",
+     "2026-06-19"
+    ],
+    [
+     "Harina",
+     0.3,
+     "kg",
+     "2026-06-24"
+    ],
+    [
+     "Agua",
+     1,
+     "L",
+     "2026-06-19"
+    ],
+    [
+     "Tomate",
+     500,
+     "g",
+     "2026-06-17"
+    ],
+    [
+     "Azúcar",
+     5,
+     "kg",
+     "2026-06-13"
+    ],
+    [
+     "Mantequilla",
+     100,
+     "g",
+     "2026-07-05"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": true,
+   "resultado": [
+    {
+     "receta": "Pan casero",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       4,
+       [
+        500.0,
+        "g"
+       ]
+      ],
+      [
+       "Agua",
+       "Agua",
+       4,
+       [
+        300.0,
+        "ml"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 4,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Salsa",
+     "usados": [
+      [
+       "Tomate",
+       "Tomate",
+       2,
+       [
+        3.0,
+        "unidades"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 5,
+     "diasMasUrgente": 2,
+     "completa": true,
+     "total": 1
+    }
+   ]
+  },
+  {
+   "caso": "poca cantidad",
+   "despensa": [
+    [
+     "Harina",
+     300,
+     "g",
+     "2026-06-20"
+    ],
+    [
+     "Agua",
+     100,
+     "ml",
+     "2026-07-15"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Pan casero",
+     "usados": [],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        500.0,
+        "g"
+       ],
+       [
+        300.0,
+        "g"
+       ]
+      ],
+      [
+       "Agua",
+       "Agua",
+       30,
+       [
+        300.0,
+        "ml"
+       ],
+       [
+        100.0,
+        "ml"
+       ]
+      ]
+     ],
+     "puntaje": 4,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Pastel",
+     "usados": [],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        0.8,
+        "kg"
+       ],
+       [
+        0.3,
+        "kg"
+       ]
+      ]
+     ],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 1
+    },
+    {
+     "receta": "Galletas",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        200.0,
+        "g"
+       ]
+      ]
+     ],
+     "faltantes": [
+      "Azúcar",
+      "Mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "harina",
+       "Harina",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "leche",
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    }
+   ]
+  },
+  {
+   "caso": "cantidad justa",
+   "despensa": [
+    [
+     "Harina",
+     0.5,
+     "kg",
+     "2026-06-20"
+    ],
+    [
+     "Agua",
+     0.3,
+     "L",
+     "2026-06-20"
+    ],
+    [
+     "Tomate",
+     3,
+     "unidades",
+     "2026-06-20"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Pan casero",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        500.0,
+        "g"
+       ]
+      ],
+      [
+       "Agua",
+       "Agua",
+       5,
+       [
+        300.0,
+        "ml"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Salsa",
+     "usados": [
+      [
+       "Tomate",
+       "Tomate",
+       5,
+       [
+        3.0,
+        "unidades"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 1
+    },
+    {
+     "receta": "Pastel",
+     "usados": [],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        0.8,
+        "kg"
+       ],
+       [
+        0.5,
+        "kg"
+       ]
+      ]
+     ],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 1
+    },
+    {
+     "receta": "Galletas",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        200.0,
+        "g"
+       ]
+      ]
+     ],
+     "faltantes": [
+      "Azúcar",
+      "Mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Omelette de queso y tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "huevo",
+      "queso"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "harina",
+       "Harina",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "leche",
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Ensalada de atún",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "atun",
+      "cebolla",
+      "limon"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Pasta con salsa de tomate",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "pasta",
+      "ajo",
+      "cebolla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 4
+    },
+    {
+     "receta": "Guiso de lentejas",
+     "usados": [
+      [
+       "tomate",
+       "Tomate",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "lenteja",
+      "zanahoria",
+      "cebolla",
+      "ajo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 5
+    }
+   ]
+  },
+  {
+   "caso": "suma de decimales",
+   "despensa": [
+    [
+     "Harina",
+     0.1,
+     "kg",
+     "2026-06-20"
+    ],
+    [
+     "Harina",
+     0.7,
+     "kg",
+     "2026-06-21"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": false,
+   "resultado": [
+    {
+     "receta": "Pastel",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        0.8,
+        "kg"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 1
+    },
+    {
+     "receta": "Pan casero",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        500.0,
+        "g"
+       ]
+      ]
+     ],
+     "faltantes": [
+      "Agua"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 2
+    },
+    {
+     "receta": "Galletas",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        200.0,
+        "g"
+       ]
+      ]
+     ],
+     "faltantes": [
+      "Azúcar",
+      "Mantequilla"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    },
+    {
+     "receta": "Panqueques",
+     "usados": [
+      [
+       "harina",
+       "Harina",
+       5,
+       null
+      ]
+     ],
+     "faltantes": [
+      "leche",
+      "huevo"
+     ],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": false,
+     "total": 3
+    }
+   ]
+  },
+  {
+   "caso": "cantidad justa, solo completas",
+   "despensa": [
+    [
+     "Harina",
+     0.5,
+     "kg",
+     "2026-06-20"
+    ],
+    [
+     "Agua",
+     0.3,
+     "L",
+     "2026-06-20"
+    ],
+    [
+     "Tomate",
+     3,
+     "unidades",
+     "2026-06-20"
+    ]
+   ],
+   "recetas": "todas",
+   "soloCompletas": true,
+   "resultado": [
+    {
+     "receta": "Pan casero",
+     "usados": [
+      [
+       "Harina",
+       "Harina",
+       5,
+       [
+        500.0,
+        "g"
+       ]
+      ],
+      [
+       "Agua",
+       "Agua",
+       5,
+       [
+        300.0,
+        "ml"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 6,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 2
+    },
+    {
+     "receta": "Salsa",
+     "usados": [
+      [
+       "Tomate",
+       "Tomate",
+       5,
+       [
+        3.0,
+        "unidades"
+       ]
+      ]
+     ],
+     "faltantes": [],
+     "descartados": [],
+     "insuficientes": [],
+     "puntaje": 3,
+     "diasMasUrgente": 5,
+     "completa": true,
+     "total": 1
+    }
+   ]
+  },
+  {
+   "caso": "recetas propias sin despensa",
+   "despensa": [],
+   "recetas": "todas",
+   "soloCompletas": false,
+   "resultado": []
+  }
+ ]
+}

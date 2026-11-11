@@ -1,0 +1,72 @@
+name: Compilar app Android (APK)
+
+# Se ejecuta en cada push y también a mano (pestaña Actions -> "Run workflow").
+# Resultado: un APK instalable en Android, en la sección "Artifacts" de la ejecución.
+#
+# Cómo funciona: la app Android es la versión web (carpeta web/) envuelta con Capacitor, que la mete en
+# un WebView nativo. Aquí se prueba la lógica web, se genera el proyecto Android y se compila con Gradle.
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pruebas de la versión web (su lógica se compara con la de Python)
+        working-directory: web
+        run: npm test
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Instalar Capacitor
+        working-directory: android-app
+        run: npm install --no-audit --no-fund
+
+      - name: Copiar la versión web a la app (sin las pruebas)
+        run: |
+          rm -rf android-app/www
+          mkdir android-app/www
+          cp -r web/index.html web/manifest.webmanifest web/sw.js web/css web/js web/iconos android-app/www/
+
+      - name: Crear el proyecto Android
+        working-directory: android-app
+        run: npx cap add android
+
+      - name: Poner el icono de Food Saver
+        working-directory: android-app
+        run: npx capacitor-assets generate --android
+
+      - name: Sincronizar la versión web con el proyecto
+        working-directory: android-app
+        run: npx cap sync android
+
+      - name: Compilar el APK
+        working-directory: android-app/android
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Comprobar el APK (paquete, versión y firma)
+        run: |
+          set -e
+          APK=android-app/android/app/build/outputs/apk/debug/app-debug.apk
+          HERRAMIENTAS=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
+          "$HERRAMIENTAS"aapt dump badging "$APK" | grep -E "^(package|application-label|launchable-activity|sdkVersion|targetSdkVersion)"
+          "$HERRAMIENTAS"apksigner verify --print-certs "$APK" | head -3
+          cp "$APK" FoodSaver.apk
+          ls -l FoodSaver.apk
+
+      - name: Guardar el APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: FoodSaver-apk
+          path: FoodSaver.apk
+          if-no-files-found: error

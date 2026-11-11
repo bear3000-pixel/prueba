@@ -1,0 +1,2 @@
+# Solo hace falta para crear el .exe. La aplicación en sí no usa librerías externas.
+pyinstaller>=6.11,<7
