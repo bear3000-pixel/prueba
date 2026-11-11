@@ -21,7 +21,8 @@ Necesitas Python 3.10+ ([python.org](https://www.python.org/downloads/); en el i
 *tcl/tk and IDLE*).
 
 ```bat
-python main.py
+python main.py             :: apariencia renovada
+python main.py --clasico   :: la versión original, por si hiciera falta volver atrás
 ```
 
 ## 2. Obtener el `.exe`
@@ -53,8 +54,12 @@ food_saver/
   recetas.py               Colección predefinida de recetas
   almacenamiento.py        Guardar / cargar JSON (escritura atómica, archivo dañado no rompe la app)
   ejemplos.py              Datos de ejemplo para la demo (fechas relativas a hoy)
-  app.py                   Interfaz tkinter: solo dibuja y conecta botones
-tests/                     54 pruebas automáticas (python -m unittest discover -s tests)
+  app.py                   Interfaz tkinter ORIGINAL: dibuja y conecta botones (no se modificó)
+  app_visual.py            Apariencia renovada: hereda de app.py y solo cambia cómo se ve
+  tema.py                  Colores, tipografía y estilos de la apariencia renovada
+  icono.py                 Icono de la ventana (generado por assets/generar_icono.py)
+assets/icono.ico           Icono del .exe
+tests/                     82 pruebas automáticas (python -m unittest discover -s tests)
 CASOS_DE_PRUEBA.md         Casos de prueba MANUALES con datos exactos y resultado esperado
 build_exe.bat              Crea el .exe en Windows
 .github/workflows/         Crea el .exe en GitHub Actions
@@ -62,6 +67,17 @@ build_exe.bat              Crea el .exe en Windows
 
 Idea de diseño: **las reglas no dependen de la pantalla**. `modelo.py` y `logica.py` no importan tkinter y
 reciben la fecha de «hoy» como parámetro, por eso se pueden probar sin abrir ventanas.
+
+### La apariencia está separada del comportamiento
+
+La mejora visual **no modifica ninguna función existente**: `app.py`, `modelo.py`, `logica.py`, `recetas.py`,
+`almacenamiento.py` y `ejemplos.py` quedaron tal cual. `app_visual.py` define una clase que **hereda** de la
+original y, una vez construida la ventana, cambia colores, tipografía, botones y distribución; además agrega un
+encabezado con el logo y un resumen (cuántos ingredientes hay, por vencer y vencidos).
+
+Solo se extienden dos funciones, y ambas llaman primero a la original con `super()`:
+`refrescar` (para actualizar el resumen del encabezado) y `_mostrar_mensaje` (para pintar la caja del mensaje).
+Una prueba automática (`test_solo_se_extienden_las_funciones_documentadas`) falla si alguien sustituye otra.
 
 ### Requisito del reto → dónde está → qué prueba lo comprueba
 
@@ -121,9 +137,28 @@ Estas son decisiones que tomó el código y que conviene que el equipo entienda 
 
 - `python -m unittest discover -s tests` → pruebas de validaciones, lógica, almacenamiento **y de la interfaz real**
   (se crea la ventana y se simula escribir en el formulario, seleccionar, editar y eliminar).
-- Revisión visual de la pantalla con datos de ejemplo, a zoom normal y al 150 % (columnas sin cortarse).
+- **Las mismas pruebas de interfaz se ejecutan dos veces**: con la versión original y con la apariencia renovada.
+  Si la capa visual cambiara el comportamiento, la segunda tanda fallaría.
+- Los escenarios de `CASOS_DE_PRUEBA.md` se ejecutaron con ambas versiones y las salidas fueron idénticas.
+- Revisión visual de la pantalla con datos de ejemplo, a zoom normal y al 150 % (columnas sin cortarse), con la
+  pantalla vacía y en modo edición. Contraste de colores texto/fondo ≥ 4,5:1 (nivel AA).
 - Ejecución del programa empaquetado con PyInstaller para confirmar que abre.
 - El workflow de GitHub repite pruebas y empaquetado en Windows y comprueba que el `.exe` abre.
+
+## 7. Criterios de evaluación del reto y dónde se ve cada uno
+
+| Criterio (peso) | Qué lo respalda en este repositorio |
+|---|---|
+| **Demostración funcional** (20 %) | El flujo completo (agregar → ordenar → vencidos aparte → receta sugerida → editar → reabrir) está en el guion de la sección 4 y cubierto por pruebas de interfaz. |
+| **Resolución del problema** (15 %) | La tabla «Requisito → código → prueba» de la sección 3 cubre cada punto del enunciado de Food Saver. |
+| **Experiencia de usuario y acabado** (15 %) | Interfaz renovada: encabezado con resumen, estados con **texto y color** (no solo color), mensajes de error/éxito en una caja visible, botones con jerarquía, buen contraste, zoom alto y ventana adaptada a la pantalla. Los errores comunes de entrada (cantidad inválida, fecha inexistente, campos vacíos, archivo dañado) se explican sin romper la app. |
+| **Descomposición de tareas** (15 %) | El código se divide por responsabilidad (modelo, lógica, recetas, almacenamiento, pantalla, apariencia) y la mejora visual se hizo como una capa aparte, sin tocar lo que ya funcionaba. |
+| **Gestión del contexto** (15 %) | El documento del reto se tradujo a requisitos concretos (sección 3), límites conocidos (sección 5) y reglas explícitas. |
+| **Verificación y depuración** (20 %) | 82 pruebas automáticas, `CASOS_DE_PRUEBA.md`, comparación entre la versión original y la renovada, y compilación + prueba automática en Windows. |
+
+> Los tres últimos criterios también evalúan **cómo trabajó el equipo con el agente de IA** (qué pidió, qué revisó,
+> qué corrigió). Esta tabla muestra la evidencia que deja el repositorio; la explicación del proceso la tiene que
+> dar el equipo con lo que realmente hizo.
 
 > Nota de transparencia para la rúbrica del evento: este código fue generado con un agente de IA (Claude Code)
 > a partir del enunciado del reto. Lo que cuenta ante el jurado es que el equipo **entienda, revise y pueda

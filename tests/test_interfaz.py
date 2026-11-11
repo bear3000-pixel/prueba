@@ -12,6 +12,7 @@ from unittest import mock
 
 from food_saver import almacenamiento, app as modulo_app
 from food_saver.app import AplicacionFoodSaver
+from food_saver.app_visual import AplicacionFoodSaverVisual
 from food_saver.modelo import formatear_fecha
 
 HOY = date(2026, 6, 15)
@@ -23,6 +24,10 @@ def fecha(dias: int) -> str:
 
 
 class BaseInterfaz(unittest.TestCase):
+    # Clase de la aplicación que se prueba. Abajo, las mismas pruebas se repiten con la
+    # apariencia nueva para demostrar que el comportamiento es idéntico.
+    CLASE_APP = AplicacionFoodSaver
+
     def setUp(self):
         try:
             self.raiz = tk.Tk()
@@ -44,7 +49,7 @@ class BaseInterfaz(unittest.TestCase):
         self.addCleanup(self.confirmar.stop)
 
     def _abrir_app(self):
-        return AplicacionFoodSaver(self.raiz, ruta_datos=self.ruta, hoy_fn=lambda: HOY)
+        return self.CLASE_APP(self.raiz, ruta_datos=self.ruta, hoy_fn=lambda: HOY)
 
     # --- ayudas para "escribir" en el formulario y leer las tablas ---
     def agregar(self, nombre, cantidad, unidad, vence):
@@ -225,6 +230,16 @@ class PruebasArchivoDanado(BaseInterfaz):
         self.assertEqual(ventana.ingredientes, [])
         modulo_app.messagebox.showwarning.assert_called_once()
         self.assertIn("dañado", modulo_app.messagebox.showwarning.call_args.args[1])
+
+
+# --------------------------------------------------------------------------- #
+# Las MISMAS pruebas, ahora contra la versión con la apariencia nueva.
+# Si alguna fallara, significaría que la capa visual cambió el comportamiento.
+# --------------------------------------------------------------------------- #
+for _original in (PruebasFormulario, PruebasListas, PruebasRecetas, PruebasArchivoDanado):
+    _nombre = _original.__name__ + "ConAparienciaNueva"
+    globals()[_nombre] = type(_nombre, (_original,), {"CLASE_APP": AplicacionFoodSaverVisual})
+del _original, _nombre
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Crear el .exe
-        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name FoodSaver main.py
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --icon assets/icono.ico --name FoodSaver main.py
 
       - name: Guardar el .exe como artefacto
         uses: actions/upload-artifact@v4

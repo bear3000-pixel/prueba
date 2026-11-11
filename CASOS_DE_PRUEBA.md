@@ -3,11 +3,12 @@
 Sirven para **comprobar la app con sus propias manos** antes de presentarla y, si el jurado pregunta
 «¿cómo verificaron que funciona?», para mostrar qué se probó y qué resultado se esperaba.
 
-> Complementan las 54 pruebas automáticas (`python -m unittest discover -s tests`).
-> Los resultados esperados de los grupos **A–E, G1–G4 y H** se obtuvieron ejecutando cada caso contra la
-> aplicación real, con la fecha de «hoy» fijada en el 11/11/2026. Los grupos **F, G5 y G6** dependen de tu
-> computador (archivos de Windows, tamaño y zoom de pantalla) y no se pudieron probar a mano antes de escribirlos:
-> son justo lo que conviene mirar tú en Windows.
+> Complementan las 82 pruebas automáticas (`python -m unittest discover -s tests`).
+> Los resultados esperados de los grupos **A–E, G1–G4, H e I1–I5** se obtuvieron ejecutando cada caso contra la
+> aplicación real, con la fecha de «hoy» fijada en el 11/11/2026, **con la versión original y con la de apariencia
+> renovada: las salidas fueron idénticas**. Los grupos **F, G5, G6, I6 e I7** dependen de tu computador (archivos de
+> Windows, tamaño y zoom de pantalla, icono) y no se pudieron probar a mano antes de escribirlos: son justo lo que
+> conviene mirar tú en Windows.
 
 ## Cómo usar este documento
 
@@ -207,6 +208,22 @@ Parte de cero y pulsa **Cargar ejemplo**.
 | H7 | Pollo y Yogur (vencidos) | **No aparecen** como ingredientes usados en ninguna receta | |
 
 *(Los resultados de H no dependen del día: los vencimientos de ejemplo se calculan respecto a hoy.)*
+
+---
+
+## I. Apariencia: encabezado, mensajes y versión clásica
+
+El encabezado verde de arriba muestra tres «chips» con el **resumen** de tu despensa. Se actualizan solos.
+
+| ID | Preparación / acción | Resultado esperado | Resultado |
+|---|---|---|---|
+| I1 | Sin ningún ingrediente (**Borrar todo**) | Chips: `0 vigentes` · `0 por vencer` · `0 vencidos` | |
+| I2 | Agrega los 6 ingredientes del **grupo C** | Chips: **`5 vigentes`** (verde) · **`3 por vencer`** (amarillo: Yogur, Leche, Queso) · **`1 vencido`** (rojo: Pollo). Observa el singular «1 vencido» | |
+| I3 | Pulsa **Cargar ejemplo** (con la despensa vacía) | Chips: `10 vigentes` · `4 por vencer` · `2 vencidos` | |
+| I4 | Edita el Pollo del grupo C y pon una fecha futura (HOY+5) | Los chips cambian **al guardar**, sin tocar nada más: `6 vigentes` · `3 por vencer` · `0 vencidos` | |
+| I5 | **Mensajes en caja de color.** Escribe cantidad `0` y pulsa *Agregar*; luego agrega un ingrediente válido | El error sale en una **caja rosada** con letra roja en negrita; el éxito, en una **caja verde clara**. El texto es el mismo de los grupos A y B | |
+| I6 | **Versión clásica.** Abre la app con `python main.py --clasico` (desde el código fuente) | Se ve la apariencia original, sin encabezado verde, y **todo lo demás funciona igual** (repite D1 y E3) | |
+| I7 | **Icono (solo Windows).** Mira el archivo `FoodSaver.exe` en el Explorador, la barra de título y la barra de tareas | Aparece el icono de la **hoja blanca sobre fondo verde** | |
 
 ---
 

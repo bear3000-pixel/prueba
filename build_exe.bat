@@ -19,7 +19,7 @@ echo [2/3] Ejecutando pruebas...
 if errorlevel 1 goto :error
 
 echo [3/3] Creando el .exe (puede tardar un minuto)...
-%PY% -m PyInstaller --noconfirm --clean --onefile --windowed --name FoodSaver main.py
+%PY% -m PyInstaller --noconfirm --clean --onefile --windowed --icon assets\icono.ico --name FoodSaver main.py
 if errorlevel 1 goto :error
 
 echo.
