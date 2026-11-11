@@ -1,0 +1,13 @@
+{
+  "appId": "com.foodsaver.app",
+  "appName": "Food Saver",
+  "webDir": "www",
+  "backgroundColor": "#EEF3EE",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#EEF3EE",
+    "allowMixedContent": false
+  }
+}

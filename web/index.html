@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1F5B3A">
+  <meta name="description" content="Aprovecha tus ingredientes antes de que venzan: ordena tu despensa por vencimiento y sugiere recetas.">
+  <title>Food Saver</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="iconos/favicon.png">
+  <link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="marca">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <circle cx="50" cy="50" r="49" class="logo-fondo"/>
+        <path d="M27 75 Q20 28 75 25 Q72 82 27 75 Z" class="logo-hoja"/>
+        <path d="M20 82 L60 40" class="logo-nervadura"/>
+      </svg>
+      <div class="marca-texto">
+        <h1>Food Saver</h1>
+        <p>Aprovecha tus ingredientes antes de que venzan</p>
+      </div>
+    </div>
+    <ul class="resumen" aria-label="Resumen de tu despensa">
+      <li class="chip chip-vigentes" id="chip-vigentes">0 vigentes</li>
+      <li class="chip chip-por-vencer" id="chip-por-vencer">0 por vencer</li>
+      <li class="chip chip-vencidos" id="chip-vencidos">0 vencidos</li>
+    </ul>
+  </header>
+
+  <nav class="pestanas" role="tablist" aria-label="Secciones">
+    <button type="button" role="tab" id="pestana-despensa" aria-controls="vista-despensa" aria-selected="true">Despensa</button>
+    <button type="button" role="tab" id="pestana-recetas" aria-controls="vista-recetas" aria-selected="false">Recetas</button>
+  </nav>
+
+  <p id="aviso-general" class="aviso-general" role="alert" hidden></p>
+
+  <main id="contenido" class="contenido">
+    <!-- ================= DESPENSA ================= -->
+    <section id="vista-despensa" class="vista" role="tabpanel" aria-labelledby="pestana-despensa">
+      <form id="formulario" class="tarjeta" novalidate autocomplete="off">
+        <h2 id="titulo-formulario">Agregar ingrediente</h2>
+        <div class="campo">
+          <label for="nombre">Ingrediente</label>
+          <input id="nombre" name="nombre" type="text" maxlength="80" enterkeyhint="next" autocapitalize="sentences">
+        </div>
+        <div class="fila">
+          <div class="campo">
+            <label for="cantidad">Cantidad</label>
+            <input id="cantidad" name="cantidad" type="text" inputmode="decimal" enterkeyhint="next">
+          </div>
+          <div class="campo">
+            <label for="unidad">Unidad</label>
+            <select id="unidad" name="unidad"></select>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="vence">Vence (DD/MM/AAAA)</label>
+          <input id="vence" name="vence" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/AAAA" enterkeyhint="done">
+        </div>
+        <p id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
+        <div class="acciones">
+          <button type="submit" id="boton-guardar" class="boton primario">Agregar</button>
+          <button type="button" id="boton-cancelar-edicion" class="boton" hidden>Cancelar edición</button>
+        </div>
+      </form>
+
+      <section class="tarjeta" aria-labelledby="titulo-vigentes">
+        <h2 id="titulo-vigentes">Ingredientes vigentes (0) — el que vence primero, arriba</h2>
+        <ul id="lista-vigentes" class="lista"></ul>
+        <p id="vacio-vigentes" class="vacio">Todavía no hay ingredientes. Agrega uno arriba o pulsa «Cargar ejemplo».</p>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="titulo-vencidos">
+        <h2 id="titulo-vencidos">Vencidos (0) — no se usan en las recetas</h2>
+        <ul id="lista-vencidos" class="lista"></ul>
+        <p id="vacio-vencidos" class="vacio">No hay ingredientes vencidos.</p>
+      </section>
+
+      <div class="acciones pie">
+        <button type="button" id="boton-ejemplo" class="boton">Cargar ejemplo</button>
+        <button type="button" id="boton-borrar-todo" class="boton peligro">Borrar todo</button>
+      </div>
+    </section>
+
+    <!-- ================= RECETAS ================= -->
+    <section id="vista-recetas" class="vista" role="tabpanel" aria-labelledby="pestana-recetas" hidden>
+      <div class="tarjeta">
+        <h2>Recetas sugeridas</h2>
+        <p id="mensaje-recetas" class="mensaje" role="status" aria-live="polite" hidden></p>
+        <div class="barra-recetas">
+          <label class="casilla"><input type="checkbox" id="solo-completas"> Solo recetas que puedo cocinar ya</label>
+          <div class="acciones">
+            <button type="button" id="boton-crear-receta" class="boton">+ Crear mi receta</button>
+            <button type="button" id="boton-mis-recetas" class="boton">Mis recetas</button>
+          </div>
+        </div>
+        <ul id="lista-recetas" class="recetas"></ul>
+        <p id="vacio-recetas" class="vacio"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Crear / editar una receta ================= -->
+  <dialog id="dialogo-receta" class="dialogo" aria-labelledby="titulo-dialogo-receta">
+    <form id="formulario-receta" novalidate autocomplete="off">
+      <header class="dialogo-cabecera">
+        <h2 id="titulo-dialogo-receta">Crear mi receta</h2>
+        <button type="button" id="cerrar-receta" class="boton-icono" aria-label="Cerrar">×</button>
+      </header>
+      <div class="dialogo-cuerpo">
+        <div class="campo">
+          <label for="receta-nombre">Nombre de la receta</label>
+          <input id="receta-nombre" type="text" maxlength="100">
+        </div>
+
+        <fieldset class="grupo">
+          <legend>Ingredientes necesarios</legend>
+          <div class="campo">
+            <label for="receta-ingrediente">Ingrediente</label>
+            <input id="receta-ingrediente" type="text" maxlength="80" enterkeyhint="next">
+          </div>
+          <div class="fila">
+            <div class="campo">
+              <label for="receta-cantidad">Cantidad</label>
+              <input id="receta-cantidad" type="text" inputmode="decimal" enterkeyhint="done">
+            </div>
+            <div class="campo">
+              <label for="receta-unidad">Unidad</label>
+              <select id="receta-unidad"></select>
+            </div>
+          </div>
+          <button type="button" id="receta-agregar" class="boton">Agregar ingrediente</button>
+          <p class="ayuda">Toca «Editar» junto a un ingrediente para cambiarlo.</p>
+          <ul id="receta-lista" class="lista"></ul>
+        </fieldset>
+
+        <div class="campo">
+          <label for="receta-pasos">Preparación (un paso por línea)</label>
+          <textarea id="receta-pasos" rows="6"></textarea>
+        </div>
+
+        <p id="receta-mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
+      </div>
+      <footer class="dialogo-pie">
+        <button type="button" id="receta-cancelar" class="boton">Cancelar</button>
+        <button type="submit" id="receta-guardar" class="boton primario">Guardar receta</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- ================= Mis recetas ================= -->
+  <dialog id="dialogo-mis-recetas" class="dialogo" aria-labelledby="titulo-mis-recetas">
+    <header class="dialogo-cabecera">
+      <h2 id="titulo-mis-recetas">Mis recetas</h2>
+      <button type="button" id="cerrar-mis-recetas" class="boton-icono" aria-label="Cerrar">×</button>
+    </header>
+    <div class="dialogo-cuerpo">
+      <p class="ayuda">Estas son las recetas que creaste. Aparecen entre las sugerencias cuando tienes alguno de sus ingredientes en la despensa.</p>
+      <ul id="mis-recetas-lista" class="lista"></ul>
+      <p id="mis-recetas-vacio" class="vacio" hidden>Todavía no has creado ninguna receta. Pulsa «+ Nueva receta» para empezar.</p>
+    </div>
+    <footer class="dialogo-pie">
+      <button type="button" id="mis-recetas-nueva" class="boton primario">+ Nueva receta</button>
+    </footer>
+  </dialog>
+
+  <!-- ================= Confirmaciones ================= -->
+  <dialog id="dialogo-confirmar" class="dialogo dialogo-chico" aria-labelledby="confirmar-titulo">
+    <form method="dialog" id="formulario-confirmar">
+      <div class="dialogo-cuerpo">
+        <h2 id="confirmar-titulo">¿Seguro?</h2>
+        <p id="confirmar-texto"></p>
+      </div>
+      <footer class="dialogo-pie">
+        <button type="button" id="confirmar-no" class="boton" value="no">No</button>
+        <button type="submit" id="confirmar-si" class="boton primario" value="si">Sí</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -9,6 +9,8 @@ Produce:
   * assets/icono.ico        -> icono del .exe (se pasa a PyInstaller con --icon)
   * food_saver/icono.py     -> el mismo dibujo en PNG/base64 para el icono de la ventana,
                                así no hace falta empaquetar archivos sueltos dentro del .exe
+  * web/iconos/*.png        -> iconos de la versión web / Android (instalable en el celular)
+  * android-app/assets/*.png-> iconos de origen para el APK (los convierte @capacitor/assets)
 """
 import base64
 import io
@@ -33,6 +35,42 @@ def dibujar() -> Image.Image:
     return imagen
 
 
+def dibujar_adaptable(fondo: bool) -> Image.Image:
+    """Icono «adaptable» de Android: la hoja ocupa ~66 % del centro (zona segura, porque el sistema
+    recorta el borde con la forma que elija cada celular). Con fondo=False es solo la hoja, transparente."""
+    imagen = Image.new("RGBA", (TAMANO, TAMANO), (0, 0, 0, 0))
+    lapiz = ImageDraw.Draw(imagen)
+    if fondo:
+        lapiz.rectangle((0, 0, TAMANO, TAMANO), fill=tema.VERDE)
+    lado = TAMANO * 0.66
+    desplazamiento = (TAMANO - lado) / 2
+    hoja = [(x + desplazamiento, y + desplazamiento) for x, y in tema.puntos_hoja(lado)]
+    lapiz.polygon(hoja, fill=tema.BLANCO)
+    x0, y0, x1, y1 = tema.nervadura_hoja(lado)
+    lapiz.line((x0 + desplazamiento, y0 + desplazamiento, x1 + desplazamiento, y1 + desplazamiento),
+               fill=tema.VERDE, width=int(TAMANO * 0.03))
+    return imagen
+
+
+def _guardar_png(imagen: Image.Image, ruta: Path, lado: int) -> None:
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    imagen.resize((lado, lado), Image.LANCZOS).save(ruta, format="PNG", optimize=True)
+
+
+def generar_iconos_web_y_android(grande: Image.Image) -> None:
+    web = RAIZ / "web" / "iconos"
+    adaptable = dibujar_adaptable(fondo=True)
+    _guardar_png(grande, web / "icono-192.png", 192)
+    _guardar_png(grande, web / "icono-512.png", 512)
+    _guardar_png(adaptable, web / "icono-maskable-512.png", 512)  # «maskable»: se recorta con cualquier forma
+    _guardar_png(adaptable, web / "apple-touch-icon.png", 180)    # iOS no recorta: va con fondo
+    _guardar_png(grande, web / "favicon.png", 48)
+    origen = RAIZ / "android-app" / "assets"
+    _guardar_png(grande, origen / "icon-only.png", 1024)
+    _guardar_png(dibujar_adaptable(fondo=True), origen / "icon-background.png", 1024)
+    _guardar_png(dibujar_adaptable(fondo=False), origen / "icon-foreground.png", 1024)
+
+
 def main() -> None:
     grande = dibujar()
 
@@ -51,7 +89,8 @@ def main() -> None:
         "ICONO_PNG_BASE64 = (\n" + "\n".join(f'    "{linea}"' for linea in lineas) + "\n)\n"
     )
     (RAIZ / "food_saver" / "icono.py").write_text(contenido, encoding="utf-8")
-    print("Listo: assets/icono.ico y food_saver/icono.py")
+    generar_iconos_web_y_android(grande)
+    print("Listo: assets/icono.ico, food_saver/icono.py, web/iconos/ y android-app/assets/")
 
 
 if __name__ == "__main__":

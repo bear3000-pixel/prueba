@@ -1,0 +1,14 @@
+{
+  "name": "food-saver-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Envoltorio de Android (Capacitor) para la versión web de Food Saver. El código de la app está en ../web",
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5"
+  }
+}

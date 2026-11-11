@@ -1,0 +1,4 @@
+# Todo esto se genera al compilar (ver .github/workflows/build-apk.yml)
+node_modules/
+android/
+www/
